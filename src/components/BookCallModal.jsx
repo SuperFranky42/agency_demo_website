@@ -108,14 +108,14 @@ function BookCallFlow({ onClose }) {
                       setTime(null)
                     }}
                     className={`flex w-16 shrink-0 flex-col items-center rounded-md border py-2.5 text-sm transition ${
-                      active ? 'border-ink bg-ink text-white' : 'border-line hover:border-ink'
+                      active ? 'border-white bg-white text-ink' : 'border-white/25 hover:border-white'
                     }`}
                   >
-                    <span className={`text-[11px] uppercase ${active ? 'text-white/70' : 'text-muted'}`}>
+                    <span className={`text-[11px] uppercase ${active ? 'text-ink/60' : 'text-muted'}`}>
                       {d.toLocaleDateString(undefined, { weekday: 'short' })}
                     </span>
                     <span className="text-lg font-semibold">{d.getDate()}</span>
-                    <span className={`text-[11px] ${active ? 'text-white/70' : 'text-muted'}`}>
+                    <span className={`text-[11px] ${active ? 'text-ink/60' : 'text-muted'}`}>
                       {d.toLocaleDateString(undefined, { month: 'short' })}
                     </span>
                   </button>
@@ -133,7 +133,7 @@ function BookCallFlow({ onClose }) {
                     onClick={() => setTime(t)}
                     className={`rounded-md border py-2 text-sm font-medium transition ${
                       taken
-                        ? 'cursor-not-allowed border-line text-neutral-300 line-through'
+                        ? 'cursor-not-allowed border-line text-white/30 line-through'
                         : time === t
                           ? 'border-accent bg-accent text-white'
                           : 'border-line hover:border-accent hover:text-accent'
@@ -206,10 +206,10 @@ function BookCallFlow({ onClose }) {
             </div>
             <h2 className="mt-5 font-serif text-3xl">You are booked in.</h2>
             <p className="mt-3 text-muted">
-              Thanks {booking.name.split(' ')[0]}. Your call is on <strong className="text-ink">{longDate}</strong> at{' '}
-              <strong className="text-ink">{booking.time}</strong>. A confirmation will be sent to {booking.email}.
+              Thanks {booking.name.split(' ')[0]}. Your call is on <strong className="text-white">{longDate}</strong> at{' '}
+              <strong className="text-white">{booking.time}</strong>. A confirmation will be sent to {booking.email}.
             </p>
-            <p className="mt-4 inline-block rounded-md bg-neutral-100 px-3 py-1.5 font-mono text-sm">Ref: {booking.reference}</p>
+            <p className="mt-4 inline-block rounded-md bg-white/10 px-3 py-1.5 font-mono text-sm">Ref: {booking.reference}</p>
             <button onClick={onClose} className="btn btn-accent mt-6 w-full">
               Done
             </button>

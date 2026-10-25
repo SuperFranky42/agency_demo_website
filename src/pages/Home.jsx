@@ -47,11 +47,26 @@ export default function Home() {
 
       <section id="services" className="py-16 sm:py-20">
         <div className="container-x">
-          <Reveal className="text-center">
-            <h2 className="section-title">Our services</h2>
-            <span className="accent-rule" />
+          <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-xl">
+              <p className="eyebrow">Our services</p>
+              <h2 className="mt-3 font-serif text-4xl tracking-tight sm:text-5xl">
+                Four services.
+                <br />
+                One pipeline.
+              </h2>
+              <p className="mt-4 max-w-md text-muted">
+                Creative, campaigns, websites and follow-up. Start with one, or connect all four.
+              </p>
+            </div>
+            <Link
+              to="/services"
+              className="shrink-0 text-sm font-semibold underline decoration-accent decoration-2 underline-offset-4 transition hover:text-accent"
+            >
+              Full service list &rarr;
+            </Link>
           </Reveal>
-          <div className="mt-12">
+          <div className="mt-8 sm:mt-10">
             <ServicesGrid />
           </div>
         </div>
@@ -62,7 +77,7 @@ export default function Home() {
           <PricingPreview />
           <p className="mt-4 text-center text-sm text-muted">
             Starting prices in USD.{' '}
-            <Link to="/pricing" className="font-medium text-ink underline decoration-accent underline-offset-4 hover:text-accent">
+            <Link to="/pricing" className="font-medium text-white underline decoration-accent underline-offset-4 hover:text-accent">
               See every package
             </Link>
           </p>

@@ -3,7 +3,7 @@ import { services } from '../data/services.js'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line bg-white">
+    <footer className="border-t border-line bg-ink">
       <div className="container-x grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link to="/" className="text-2xl font-black tracking-tight">
@@ -41,7 +41,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-line py-5 text-center text-sm text-ink">
+      <div className="border-t border-line py-5 text-center text-sm text-white/60">
         &copy; {new Date().getFullYear()} AEGIS Agency. All rights reserved.
       </div>
     </footer>

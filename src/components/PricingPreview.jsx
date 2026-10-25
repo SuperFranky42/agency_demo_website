@@ -25,7 +25,7 @@ function SparkIcon() {
 export default function PricingPreview() {
   return (
     <div className="grid gap-5 md:grid-cols-2">
-      <Reveal className="rounded-md border border-line bg-white p-6 shadow-sm">
+      <Reveal className="rounded-md border border-line bg-ink-soft p-6">
         <div className="flex items-baseline justify-between">
           <h3 className="font-serif text-2xl">New business</h3>
           <span className="text-xs text-muted">one-time</span>
@@ -45,23 +45,23 @@ export default function PricingPreview() {
         </ul>
       </Reveal>
 
-      <Reveal delay={100} className="rounded-md bg-ink p-6 text-white shadow-sm">
+      <Reveal delay={100} className="rounded-md border border-line bg-ink-soft p-6">
         <div className="flex items-baseline justify-between">
           <h3 className="font-serif text-2xl">Already operating</h3>
-          <span className="text-xs text-white/60">per month</span>
+          <span className="text-xs text-muted">per month</span>
         </div>
         <ul className="mt-4 space-y-1">
           {operating.map((p) => (
             <li key={p.id}>
               <Link
                 to={`/pricing?tab=monthly#${p.id}`}
-                className={`flex items-center justify-between rounded-sm px-2 py-3 transition ${p.featured ? 'bg-accent hover:bg-accent-dark' : 'hover:bg-white/10'}`}
+                className={`flex items-center justify-between rounded-sm px-2 py-3 transition ${p.featured ? 'bg-accent text-white hover:bg-accent-dark' : 'hover:bg-white/5 hover:text-accent'}`}
               >
                 <span className="flex items-center gap-2">
                   {p.featured && <SparkIcon />}
                   {p.name}
                 </span>
-                <span className="font-medium">{p.price}</span>
+                <span className={`font-medium ${p.featured ? '' : 'text-accent'}`}>{p.price}</span>
               </Link>
             </li>
           ))}

@@ -44,7 +44,7 @@ function Chip({ selected, onClick, children }) {
       onClick={onClick}
       aria-pressed={selected}
       className={`rounded-full border px-3.5 py-1.5 text-sm transition ${
-        selected ? 'border-ink bg-ink text-white' : 'border-line hover:border-ink'
+        selected ? 'border-white bg-white text-ink' : 'border-white/25 hover:border-white'
       }`}
     >
       {children}
@@ -136,7 +136,7 @@ export default function Contact() {
         </div>
         <h1 className="mt-6 font-serif text-4xl sm:text-5xl">Thanks, {submitted.name.split(' ')[0]}.</h1>
         <p className="mt-4 text-lg text-muted">
-          We have your request for <strong className="text-ink">{submitted.business}</strong>. Expect a reply at{' '}
+          We have your request for <strong className="text-white">{submitted.business}</strong>. Expect a reply at{' '}
           {submitted.email} within one business day with one clear recommendation.
         </p>
         <dl className="mx-auto mt-8 grid max-w-md gap-3 rounded-md border border-line p-5 text-left text-sm">
@@ -156,11 +156,11 @@ export default function Contact() {
 
   return (
     <>
-      <section className="bg-ink text-white">
+      <section className="border-b border-line">
         <div className="container-x py-14 sm:py-20">
           <p className="eyebrow">Get a quote</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">Tell us what you are building.</h1>
-          <p className="mt-5 max-w-2xl text-lg text-white/70">
+          <p className="mt-5 max-w-2xl text-lg text-muted">
             A few quick questions so we can recommend one clear solution, not a long menu of options.
           </p>
         </div>
@@ -283,14 +283,14 @@ export default function Contact() {
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:h-fit">
             {selectedPackage && (
-              <div className="rounded-md bg-ink p-6 text-white">
+              <div className="rounded-md border border-line bg-ink-soft p-6">
                 <p className="eyebrow">Selected package</p>
                 <h3 className="mt-2 font-serif text-2xl">{selectedPackage.name}</h3>
                 <p className="mt-1">
                   <span className="text-2xl font-bold text-accent">{selectedPackage.price}</span>{' '}
-                  <span className="text-sm text-white/60">{selectedPackage.unit}</span>
+                  <span className="text-sm text-muted">{selectedPackage.unit}</span>
                 </p>
-                <ul className="mt-4 space-y-1.5 text-sm text-white/80">
+                <ul className="mt-4 space-y-1.5 text-sm text-muted">
                   {selectedPackage.features.slice(0, 4).map((f) => (
                     <li key={f}>&middot; {f}</li>
                   ))}

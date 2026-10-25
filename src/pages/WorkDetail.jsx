@@ -15,17 +15,17 @@ export default function WorkDetail() {
 
   return (
     <>
-      <section className="bg-ink text-white">
+      <section className="border-b border-line">
         <div className="container-x py-12 sm:py-16">
-          <Link to="/work" className="text-sm text-white/60 hover:text-accent">
+          <Link to="/work" className="text-sm text-muted hover:text-accent">
             &larr; All work
           </Link>
           <p className="eyebrow mt-6">
             {item.category} &middot; {item.year}
           </p>
           <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-6xl">{item.client}</h1>
-          <p className="mt-4 max-w-2xl text-lg text-white/70">{item.summary}</p>
-          <div className="mt-10 aspect-[16/7] overflow-hidden rounded-md border border-white/10">
+          <p className="mt-4 max-w-2xl text-lg text-muted">{item.summary}</p>
+          <div className="mt-10 aspect-[16/7] overflow-hidden rounded-md border border-line">
             <WorkVisual type={item.visual} />
           </div>
         </div>
@@ -46,9 +46,9 @@ export default function WorkDetail() {
               <h2 className="font-serif text-3xl">Results</h2>
               <dl className="mt-6 grid gap-4 sm:grid-cols-3">
                 {item.results.map((r) => (
-                  <div key={r.label} className="rounded-md bg-ink p-5 text-white">
+                  <div key={r.label} className="rounded-md border border-line bg-ink-soft p-5">
                     <dt className="text-3xl font-bold text-accent">{r.value}</dt>
-                    <dd className="mt-2 text-sm text-white/70">{r.label}</dd>
+                    <dd className="mt-2 text-sm text-muted">{r.label}</dd>
                   </div>
                 ))}
               </dl>

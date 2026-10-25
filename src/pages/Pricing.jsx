@@ -50,7 +50,7 @@ export default function Pricing() {
         Starting prices in USD. Final scope and pricing are confirmed in a written proposal before any work begins.
       </PageHeader>
 
-      <div className="sticky top-16 z-30 border-b border-line bg-white/95 backdrop-blur">
+      <div className="sticky top-16 z-30 border-b border-line bg-ink/95 backdrop-blur">
         <div className="container-x no-scrollbar flex gap-2 overflow-x-auto py-3" role="tablist">
           {pricingTabs.map((t) => (
             <button
@@ -59,7 +59,7 @@ export default function Pricing() {
               aria-selected={t.id === activeId}
               onClick={() => selectTab(t.id)}
               className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition ${
-                t.id === activeId ? 'bg-ink text-white' : 'text-ink hover:bg-neutral-100'
+                t.id === activeId ? 'bg-white text-ink' : 'text-white/80 hover:bg-white/10'
               }`}
             >
               {t.label}
@@ -97,7 +97,7 @@ export default function Pricing() {
               <h3 className="font-serif text-2xl">Optional ongoing support</h3>
               <div className="mt-5 overflow-x-auto rounded-md border border-line">
                 <table className="w-full text-left text-sm">
-                  <thead className="bg-neutral-50">
+                  <thead className="bg-white/5">
                     <tr>
                       <th className="px-5 py-3 font-semibold">Service</th>
                       <th className="px-5 py-3 font-semibold">Monthly range</th>
@@ -134,7 +134,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-neutral-50 py-14 sm:py-16">
+      <section className="border-t border-line bg-ink-soft py-14 sm:py-16">
         <div className="container-x grid gap-10 md:grid-cols-[1fr_1.5fr]">
           <div>
             <p className="eyebrow">Important details</p>

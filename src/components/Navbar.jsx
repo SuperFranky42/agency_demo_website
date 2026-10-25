@@ -24,11 +24,11 @@ export default function Navbar() {
   }, [])
 
   const linkClass = ({ isActive }) =>
-    `relative text-sm font-medium transition hover:text-accent ${isActive ? 'text-accent' : 'text-ink'}`
+    `relative text-sm font-medium transition hover:text-accent ${isActive ? 'text-accent' : 'text-white'}`
 
   return (
     <header
-      className={`sticky top-0 z-40 bg-white/95 backdrop-blur transition-shadow ${scrolled ? 'shadow-[0_1px_0_0_var(--color-line)]' : ''}`}
+      className={`sticky top-0 z-40 border-b border-transparent bg-ink/90 backdrop-blur ${scrolled ? 'border-line' : ''}`}
     >
       <nav className="container-x flex h-16 items-center justify-between">
         <div className="flex items-center gap-12">
@@ -62,9 +62,9 @@ export default function Navbar() {
           aria-expanded={open}
         >
           <span className="relative block h-3.5 w-6">
-            <span className={`absolute left-0 block h-0.5 w-6 bg-ink transition ${open ? 'top-1.5 rotate-45' : 'top-0'}`} />
-            <span className={`absolute left-0 top-1.5 block h-0.5 w-6 bg-ink transition ${open ? 'opacity-0' : ''}`} />
-            <span className={`absolute left-0 block h-0.5 w-6 bg-ink transition ${open ? 'top-1.5 -rotate-45' : 'top-3'}`} />
+            <span className={`absolute left-0 block h-0.5 w-6 bg-white transition ${open ? 'top-1.5 rotate-45' : 'top-0'}`} />
+            <span className={`absolute left-0 top-1.5 block h-0.5 w-6 bg-white transition ${open ? 'opacity-0' : ''}`} />
+            <span className={`absolute left-0 block h-0.5 w-6 bg-white transition ${open ? 'top-1.5 -rotate-45' : 'top-3'}`} />
           </span>
         </button>
       </nav>
