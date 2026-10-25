@@ -146,9 +146,15 @@ function Motes() {
 function Icon({ index, position }) {
   const ref = useRef()
   useFrame((state, delta) => {
-    ref.current.rotation.y += delta * (index === 2 ? 0.9 : 0.55)
-    ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.6 + index) * 0.15
-    ref.current.position.y = position[1] + 0.62 + Math.sin(state.clock.elapsedTime * 1.4 + index) * 0.07
+    const node = ref.current
+    node.rotation.y += delta * (index === 2 ? 0.9 : 0.55)
+    if (index === 1) {
+      node.rotation.x = 0
+      node.rotation.z = 0
+    } else {
+      node.rotation.x = Math.sin(state.clock.elapsedTime * 0.6 + index) * 0.15
+    }
+    node.position.y = position[1] + 0.62 + Math.sin(state.clock.elapsedTime * 1.4 + index) * 0.07
   })
   return (
     <group ref={ref} position={[position[0], position[1] + 0.62, position[2]]}>
@@ -160,7 +166,7 @@ function Icon({ index, position }) {
       )}
       {index === 1 && (
         <mesh>
-          <icosahedronGeometry args={[0.2, 0]} />
+          <octahedronGeometry args={[0.22, 0]} />
           <meshStandardMaterial color={ACCENT} emissive={ACCENT} emissiveIntensity={0.55} metalness={0.2} roughness={0.25} flatShading />
         </mesh>
       )}
