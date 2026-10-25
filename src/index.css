@@ -107,6 +107,9 @@ body {
 .hero-scene {
   transition: opacity 1.15s cubic-bezier(0.33, 0, 0.2, 1);
 }
+.hero-scene canvas {
+  cursor: grab;
+}
 .hero-scene.is-ready {
   opacity: 1;
 }

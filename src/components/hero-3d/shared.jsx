@@ -1,5 +1,5 @@
-import { useMemo, useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useEffect, useMemo, useRef } from 'react'
+import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
 export const ACCENT = '#f04e0f'
@@ -47,15 +47,136 @@ export function LabelProjector({ items, els }) {
   return <group ref={anchor} />
 }
 
-export function ParallaxGroup({ children, strength = 0.25, baseRotation = [0, 0, 0], spin = 0 }) {
+const YAW_LIMIT = 1.05
+const PITCH_MIN = -0.48
+const PITCH_MAX = 0.38
+
+export function ParallaxGroup({ children, strength = 0.25, baseRotation = [0, 0, 0], spin = 0, orbit = false }) {
   const ref = useRef()
+  const gl = useThree((state) => state.gl)
+  const drag = useRef({
+    active: false,
+    id: null,
+    lastX: 0,
+    lastY: 0,
+    lastT: 0,
+    yaw: 0,
+    pitch: 0,
+    velYaw: 0,
+    velPitch: 0,
+    held: false,
+  })
+  const reduceMotion = useMemo(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    [],
+  )
+
+  useEffect(() => {
+    if (!orbit) return undefined
+    const el = gl.domElement
+    el.style.cursor = 'grab'
+
+    const onDown = (event) => {
+      if (event.button !== 0) return
+      const d = drag.current
+      const node = ref.current
+      d.active = true
+      d.held = true
+      d.id = event.pointerId
+      d.lastX = event.clientX
+      d.lastY = event.clientY
+      d.lastT = performance.now()
+      d.velYaw = 0
+      d.velPitch = 0
+      if (node) {
+        d.yaw = node.rotation.y - baseRotation[1]
+        d.pitch = node.rotation.x - baseRotation[0]
+      }
+      el.dataset.dragging = '1'
+      el.style.cursor = 'grabbing'
+      try {
+        el.setPointerCapture(event.pointerId)
+      } catch {
+        // The pointer can already be gone if the gesture ends immediately.
+      }
+    }
+
+    const onMove = (event) => {
+      const d = drag.current
+      if (!d.active || event.pointerId !== d.id) return
+      const now = performance.now()
+      const dt = Math.max((now - d.lastT) / 1000, 1 / 120)
+      const width = Math.max(el.clientWidth, 1)
+      const height = Math.max(el.clientHeight, 1)
+      const yaw = -((event.clientX - d.lastX) / width) * 2.6
+      const pitch = ((event.clientY - d.lastY) / height) * 1.15
+      d.lastX = event.clientX
+      d.lastY = event.clientY
+      d.lastT = now
+      d.yaw = THREE.MathUtils.clamp(d.yaw + yaw, -YAW_LIMIT, YAW_LIMIT)
+      d.pitch = THREE.MathUtils.clamp(d.pitch + pitch, PITCH_MIN, PITCH_MAX)
+      d.velYaw = Math.abs(d.yaw) >= YAW_LIMIT ? 0 : yaw / dt
+      d.velPitch = d.pitch <= PITCH_MIN || d.pitch >= PITCH_MAX ? 0 : pitch / dt
+    }
+
+    const endDrag = (event) => {
+      const d = drag.current
+      if (!d.active || event.pointerId !== d.id) return
+      d.active = false
+      d.id = null
+      if (performance.now() - d.lastT > 80) {
+        d.velYaw = 0
+        d.velPitch = 0
+      }
+      try {
+        if (el.hasPointerCapture(event.pointerId)) el.releasePointerCapture(event.pointerId)
+      } catch {
+        // Ended pointers are no longer captured.
+      }
+      delete el.dataset.dragging
+      el.style.cursor = el.dataset.hovering === '1' ? 'pointer' : 'grab'
+    }
+
+    el.addEventListener('pointerdown', onDown)
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', endDrag)
+    window.addEventListener('pointercancel', endDrag)
+    return () => {
+      delete el.dataset.dragging
+      el.style.cursor = ''
+      el.removeEventListener('pointerdown', onDown)
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', endDrag)
+      window.removeEventListener('pointercancel', endDrag)
+    }
+  }, [gl, orbit])
+
   useFrame((state, delta) => {
     const g = ref.current
     if (!g) return
-    const targetX = baseRotation[0] - state.pointer.y * strength * 0.5
-    const targetY = baseRotation[1] + state.pointer.x * strength + (spin ? Math.sin(state.clock.elapsedTime * spin) * 0.15 : 0)
-    g.rotation.x = THREE.MathUtils.damp(g.rotation.x, targetX, 3, delta)
-    g.rotation.y = THREE.MathUtils.damp(g.rotation.y, targetY, 3, delta)
+    const d = drag.current
+    if (orbit && !d.active) {
+      d.yaw = THREE.MathUtils.clamp(d.yaw + d.velYaw * delta, -YAW_LIMIT, YAW_LIMIT)
+      d.pitch = THREE.MathUtils.clamp(d.pitch + d.velPitch * delta, PITCH_MIN, PITCH_MAX)
+      const decay = Math.exp(-3.2 * delta)
+      d.velYaw = Math.abs(d.yaw) >= YAW_LIMIT ? 0 : d.velYaw * decay
+      d.velPitch = d.pitch <= PITCH_MIN || d.pitch >= PITCH_MAX ? 0 : d.velPitch * decay
+    }
+    const follow = orbit && (d.active || d.held) ? 0 : 1
+    const idle = spin && follow && !reduceMotion ? Math.sin(state.clock.elapsedTime * spin) * 0.15 : 0
+    const targetX = THREE.MathUtils.clamp(
+      baseRotation[0] + (orbit ? d.pitch : 0) - state.pointer.y * strength * 0.5 * follow,
+      -0.58,
+      0.46,
+    )
+    const targetY = THREE.MathUtils.clamp(
+      baseRotation[1] + (orbit ? d.yaw : 0) + state.pointer.x * strength * follow + idle,
+      -1.2,
+      1.2,
+    )
+    const lambda = orbit ? 8 : 3
+    g.rotation.x = THREE.MathUtils.damp(g.rotation.x, targetX, lambda, delta)
+    g.rotation.y = THREE.MathUtils.damp(g.rotation.y, targetY, lambda, delta)
   })
   return (
     <group ref={ref} rotation={baseRotation}>
@@ -72,7 +193,7 @@ export function PulseRing({ position, color = ACCENT, size = 0.25, delay = 0, ro
     ref.current.material.opacity = (1 - t) * 0.8
   })
   return (
-    <mesh ref={ref} position={position} rotation={rotation}>
+    <mesh ref={ref} position={position} rotation={rotation} raycast={() => null}>
       <ringGeometry args={[size, size + 0.03, 48]} />
       <meshBasicMaterial color={color} transparent side={THREE.DoubleSide} depthWrite={false} />
     </mesh>

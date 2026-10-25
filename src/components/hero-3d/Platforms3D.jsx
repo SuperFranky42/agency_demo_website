@@ -31,6 +31,7 @@ function glowMap() {
 }
 
 const GLOW = glowMap()
+const noRaycast = () => null
 
 function topOf(p) {
   return new THREE.Vector3(p.pos[0], p.pos[1] + 0.28, p.pos[2])
@@ -70,11 +71,11 @@ function Hoppers() {
 
   return (
     <>
-      <instancedMesh ref={halo} args={[null, null, HOPS]}>
+      <instancedMesh ref={halo} args={[null, null, HOPS]} raycast={noRaycast}>
         <sphereGeometry args={[1, 12, 12]} />
         <meshBasicMaterial color={ACCENT} transparent opacity={0.28} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
       </instancedMesh>
-      <instancedMesh ref={core} args={[null, null, HOPS]}>
+      <instancedMesh ref={core} args={[null, null, HOPS]} raycast={noRaycast}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshBasicMaterial toneMapped={false} />
       </instancedMesh>
@@ -94,11 +95,11 @@ function Trails() {
 
   return curves.map((c, i) => (
     <group key={i}>
-      <mesh>
+      <mesh raycast={noRaycast}>
         <tubeGeometry args={[c, 64, 0.028, 8, false]} />
         <meshBasicMaterial color={ACCENT} transparent opacity={0.28} depthWrite={false} blending={THREE.AdditiveBlending} />
       </mesh>
-      <mesh>
+      <mesh raycast={noRaycast}>
         <tubeGeometry args={[c, 64, 0.008, 8, false]} />
         <meshBasicMaterial color="#ffffff" transparent opacity={0.7} toneMapped={false} />
       </mesh>
@@ -135,7 +136,7 @@ function Motes() {
   })
 
   return (
-    <instancedMesh ref={ref} args={[null, null, count]}>
+    <instancedMesh ref={ref} args={[null, null, count]} raycast={noRaycast}>
       <sphereGeometry args={[1, 8, 8]} />
       <meshBasicMaterial color={ACCENT} transparent opacity={0.55} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
     </instancedMesh>
@@ -175,31 +176,66 @@ function Icon({ index, position }) {
 
 function Platform({ p, index }) {
   const accent = index === 2
+  const rig = useRef()
+  const hovered = useRef(false)
+  const gl = useThree((state) => state.gl)
+
+  useFrame((_, delta) => {
+    const node = rig.current
+    if (!node) return
+    const scale = THREE.MathUtils.damp(node.scale.x, hovered.current ? 1.08 : 1, 9, delta)
+    const lift = THREE.MathUtils.damp(node.position.y, hovered.current ? 0.1 : 0, 9, delta)
+    node.scale.setScalar(scale)
+    node.position.y = lift
+  })
+
+  const cursor = (next) => {
+    const el = gl.domElement
+    if (el.dataset.dragging === '1') return
+    el.style.cursor = next
+  }
+
   return (
-    <group>
-      <mesh position={[p.pos[0], p.pos[1] - 0.22, p.pos[2]]} rotation={[-Math.PI / 2, 0, 0]}>
+    <group position={p.pos}>
+      <mesh position={[0, -0.22, 0]} rotation={[-Math.PI / 2, 0, 0]} raycast={noRaycast}>
         <planeGeometry args={[accent ? 2.4 : 1.9, accent ? 2.4 : 1.9]} />
         <meshBasicMaterial map={GLOW} transparent opacity={accent ? 0.7 : 0.38} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
       </mesh>
-      <RoundedBox args={[1.28, 0.28, 1.28]} radius={0.08} smoothness={4} position={p.pos}>
-        <meshStandardMaterial color={accent ? '#2a120b' : '#141414'} metalness={0.72} roughness={0.22} />
-      </RoundedBox>
-      <mesh position={[p.pos[0], p.pos[1] + 0.145, p.pos[2]]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[1.12, 1.12]} />
-        <meshStandardMaterial
-          color={accent ? ACCENT : '#242424'}
-          emissive={accent ? ACCENT : '#000000'}
-          emissiveIntensity={accent ? 0.55 : 0}
-          metalness={0.35}
-          roughness={0.4}
-        />
-      </mesh>
-      <mesh position={[p.pos[0], p.pos[1] + 0.152, p.pos[2]]} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.34, 0.37, 64]} />
-        <meshBasicMaterial color={accent ? '#ffffff' : ACCENT} transparent opacity={0.85} toneMapped={false} />
-      </mesh>
-      <PulseRing position={[p.pos[0], p.pos[1] + 0.16, p.pos[2]]} size={0.34} delay={index * 0.7} color={accent ? '#ffffff' : ACCENT} />
-      <Icon index={index} position={p.pos} />
+      <group
+        ref={rig}
+        onPointerOver={(event) => {
+          event.stopPropagation()
+          hovered.current = true
+          gl.domElement.dataset.hovering = '1'
+          cursor('pointer')
+        }}
+        onPointerOut={(event) => {
+          event.stopPropagation()
+          hovered.current = false
+          delete gl.domElement.dataset.hovering
+          cursor('grab')
+        }}
+      >
+        <RoundedBox args={[1.28, 0.28, 1.28]} radius={0.08} smoothness={4}>
+          <meshStandardMaterial color={accent ? '#2a120b' : '#141414'} metalness={0.72} roughness={0.22} />
+        </RoundedBox>
+        <mesh position={[0, 0.145, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[1.12, 1.12]} />
+          <meshStandardMaterial
+            color={accent ? ACCENT : '#242424'}
+            emissive={accent ? ACCENT : '#000000'}
+            emissiveIntensity={accent ? 0.55 : 0}
+            metalness={0.35}
+            roughness={0.4}
+          />
+        </mesh>
+        <mesh position={[0, 0.152, 0]} rotation={[-Math.PI / 2, 0, 0]} raycast={noRaycast}>
+          <ringGeometry args={[0.34, 0.37, 64]} />
+          <meshBasicMaterial color={accent ? '#ffffff' : ACCENT} transparent opacity={0.85} toneMapped={false} />
+        </mesh>
+        <PulseRing position={[0, 0.16, 0]} size={0.34} delay={index * 0.7} color={accent ? '#ffffff' : ACCENT} />
+        <Icon index={index} position={[0, 0, 0]} />
+      </group>
     </group>
   )
 }
@@ -261,7 +297,7 @@ export default function Platforms3D() {
         <FitCamera />
         <RevealWhenDrawn onReady={() => setReady(true)} />
         <SceneLights />
-        <ParallaxGroup strength={0.05} spin={0.06}>
+        <ParallaxGroup strength={0.62} spin={0.06} orbit>
           <group>
             <Motes />
             {PLATFORMS.map((p, i) => (
