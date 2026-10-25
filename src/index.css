@@ -89,6 +89,27 @@ body {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }
 }
+
+.hero-copy,
+.hero-scene {
+  opacity: 0;
+}
+.hero-copy {
+  transform: translateY(16px);
+  transition:
+    opacity 1.05s cubic-bezier(0.33, 0, 0.2, 1),
+    transform 1.05s cubic-bezier(0.33, 0, 0.2, 1);
+}
+.hero-copy.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero-scene {
+  transition: opacity 1.15s cubic-bezier(0.33, 0, 0.2, 1);
+}
+.hero-scene.is-ready {
+  opacity: 1;
+}
 @keyframes pulse-dot {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.15); }
@@ -107,5 +128,13 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-copy,
+  .hero-copy.is-in,
+  .hero-scene,
+  .hero-scene.is-ready {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
   .animate-float-slow, .animate-pulse-dot { animation: none; }
 }

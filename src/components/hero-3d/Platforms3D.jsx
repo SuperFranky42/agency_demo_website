@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { RoundedBox } from '@react-three/drei'
 import * as THREE from 'three'
@@ -232,10 +232,23 @@ const LABELS = PLATFORMS.map((p) => ({
   content: <LabelText title={p.title} sub={p.sub} accent={p.accent} />,
 }))
 
+function RevealWhenDrawn({ onReady }) {
+  const sent = useRef(false)
+  useFrame(() => {
+    if (sent.current) return
+    sent.current = true
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => onReady())
+    })
+  })
+  return null
+}
+
 export default function Platforms3D() {
   const els = useRef([])
+  const [ready, setReady] = useState(false)
   return (
-    <div className="absolute inset-0">
+    <div className={`hero-scene absolute inset-0${ready ? ' is-ready' : ''}`}>
       <Canvas
         camera={{ position: [0, 2.2, 8], fov: 34 }}
         dpr={[1, 2]}
@@ -246,6 +259,7 @@ export default function Platforms3D() {
         }}
       >
         <FitCamera />
+        <RevealWhenDrawn onReady={() => setReady(true)} />
         <SceneLights />
         <ParallaxGroup strength={0.05} spin={0.06}>
           <group>

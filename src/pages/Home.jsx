@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import HeroArt from '../components/HeroArt.jsx'
 import ServicesGrid from '../components/ServicesGrid.jsx'
@@ -10,6 +11,18 @@ import { work } from '../data/work.js'
 
 export default function Home() {
   const { openBookCall } = useBookCall()
+  const [entered, setEntered] = useState(false)
+
+  useEffect(() => {
+    let second = 0
+    const first = requestAnimationFrame(() => {
+      second = requestAnimationFrame(() => setEntered(true))
+    })
+    return () => {
+      cancelAnimationFrame(first)
+      cancelAnimationFrame(second)
+    }
+  }, [])
 
   return (
     <>
@@ -19,7 +32,7 @@ export default function Home() {
           aria-hidden="true"
         />
         <div className="container-x relative grid items-center gap-8 py-14 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:gap-6 md:py-20 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">
-          <div className="min-w-0 animate-[fadeIn_0.8s_ease]">
+          <div className={`hero-copy min-w-0${entered ? ' is-in' : ''}`}>
             <h1 className="text-5xl font-extrabold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
               Get found.
               <br />
@@ -39,9 +52,7 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="animate-[fadeIn_1s_ease]">
-            <HeroArt />
-          </div>
+          <HeroArt />
         </div>
       </section>
 
