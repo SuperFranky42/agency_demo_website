@@ -1,0 +1,461 @@
+export const pricingTabs = [
+  {
+    id: 'monthly',
+    label: 'Monthly services',
+    heading: 'For existing businesses',
+    description:
+      'Ongoing content, marketing and systems support. Choose the level that matches your current growth needs.',
+    groups: [
+      {
+        packages: [
+          {
+            id: 'essential',
+            name: 'Essential',
+            price: '$399',
+            unit: 'per month',
+            tagline: 'A consistent online presence and a solid local foundation.',
+            features: [
+              '4 short-form reels + 4 branded graphics',
+              'Facebook and Instagram management',
+              'Google Business Profile management',
+              'Basic local SEO',
+              'Website maintenance',
+              'Content planning and scheduling',
+              'Monthly performance report',
+            ],
+          },
+          {
+            id: 'growth-engine',
+            name: 'Growth Engine',
+            price: '$799',
+            unit: 'per month',
+            badge: 'Recommended',
+            highlight: true,
+            tagline: 'Our core package for businesses that want content connected to lead generation.',
+            features: [
+              '8 short-form reels + 6 graphics/carousels',
+              'Everything in Essential, with expanded content',
+              'Meta Ads and Google Ads management',
+              'Website and landing-page optimisation',
+              'One lead-generation funnel',
+              'CRM and lead tracking setup',
+              'One automated lead follow-up workflow',
+              'Monthly campaign and lead report',
+            ],
+          },
+          {
+            id: 'complete',
+            name: 'Complete Growth Partner',
+            price: '$1,799',
+            unit: 'per month',
+            badge: 'Full-service',
+            tagline: 'A broader creative and automation system for businesses ready to scale.',
+            features: [
+              '12-16 short-form reels + 8 graphics/carousels',
+              'Publishing across Facebook, Instagram, TikTok and YouTube',
+              'Platform-specific content optimisation',
+              'YouTube thumbnails and publishing support',
+              'Advanced funnel and conversion optimisation',
+              'AI receptionist or lead-qualification workflow',
+              'Automated follow-ups and appointment workflows',
+              'Review-request automation',
+              'Ongoing monitoring and monthly strategy review',
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'launch',
+    label: 'Launch packages',
+    heading: 'For new businesses',
+    description:
+      'Build the essentials first, then add ongoing marketing or automation when you are ready.',
+    groups: [
+      {
+        packages: [
+          {
+            id: 'brand-starter',
+            name: 'Brand Starter',
+            price: '$499',
+            unit: 'one-time',
+            tagline: 'A clear, professional starting point for a new brand.',
+            features: [
+              'Logo and basic brand identity',
+              'Facebook and Instagram business profiles',
+              '8 branded launch graphics',
+              'Brand messaging and content plan',
+              'Google Business Profile setup guidance, where eligible',
+            ],
+          },
+          {
+            id: 'business-launch',
+            name: 'Business Launch',
+            price: '$999',
+            unit: 'one-time',
+            badge: 'Popular',
+            highlight: true,
+            tagline: 'A practical online foundation to help customers find and contact you.',
+            features: [
+              'Brand identity essentials',
+              'Website up to 5 pages using an agreed template',
+              '8 graphics + 4 short-form videos',
+              'Social profile setup',
+              'Contact forms and lead capture',
+              'Basic SEO and analytics setup',
+            ],
+          },
+          {
+            id: 'launch-automation',
+            name: 'Launch + Automation',
+            price: '$1,799',
+            unit: 'one-time',
+            tagline: 'A launch package with a lead pipeline and automated follow-up.',
+            features: [
+              'Everything in Business Launch',
+              'Lead-generation landing page',
+              'CRM and pipeline setup',
+              'One basic AI-assisted qualification or receptionist workflow',
+              'Automated follow-up sequence',
+              'Campaign tracking and handover',
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'websites',
+    label: 'Websites',
+    heading: 'Website pricing',
+    description:
+      'Indicative starting prices. Final quotes depend on scope, complexity, integrations, content readiness and third-party costs.',
+    groups: [
+      {
+        title: 'Business & portfolio websites',
+        range: '$99 - $499+',
+        packages: [
+          {
+            id: 'web-starter',
+            name: 'Starter',
+            price: '$99',
+            unit: 'one-time',
+            tagline: 'For a tightly defined starter scope.',
+            features: ['One-page, template-based site', 'Mobile responsive', 'Contact links'],
+          },
+          {
+            id: 'web-professional',
+            name: 'Professional',
+            price: '$299',
+            unit: 'one-time',
+            badge: 'Popular',
+            highlight: true,
+            tagline: 'For professionals and small businesses.',
+            features: ['Up to 5 pages', 'Tailored styling', 'Contact form', 'Basic on-page SEO'],
+          },
+          {
+            id: 'web-premium',
+            name: 'Premium',
+            price: '$499+',
+            unit: 'one-time',
+            tagline: 'A stronger visual direction.',
+            features: ['Up to 8-10 pages', 'Stronger visual direction', 'Analytics and lead capture'],
+          },
+        ],
+      },
+      {
+        title: 'Interactive 3D websites',
+        range: '$999+',
+        packages: [
+          {
+            id: '3d-portfolio',
+            name: '3D Portfolio',
+            price: '$999',
+            unit: 'one-time',
+            tagline: 'For premium portfolios and product showcases.',
+            features: ['Defined 3D elements', 'Animations', 'Responsive layout'],
+          },
+          {
+            id: '3d-immersive',
+            name: 'Immersive',
+            price: '$1,500 - $2,500',
+            unit: 'one-time',
+            tagline: 'Visual storytelling for brands.',
+            features: ['Custom scenes', 'Scroll interactions', 'Visual storytelling'],
+          },
+          {
+            id: '3d-advanced',
+            name: 'Advanced',
+            price: '$3,000+',
+            unit: 'one-time',
+            tagline: 'Complex, interactive experiences.',
+            features: ['Configurators', 'Complex scenes', 'Custom interactions'],
+          },
+        ],
+      },
+      {
+        title: 'E-commerce & transactional websites',
+        range: '$299 - $2,000+',
+        packages: [
+          {
+            id: 'shop-basic',
+            name: 'Basic store',
+            price: '$299 - $499',
+            unit: 'one-time',
+            tagline: 'Get selling quickly.',
+            features: ['Theme-based store', 'Initial product setup', 'Standard checkout configuration'],
+          },
+          {
+            id: 'shop-growth',
+            name: 'Growth store',
+            price: '$799 - $1,200',
+            unit: 'one-time',
+            badge: 'Popular',
+            highlight: true,
+            tagline: 'A tailored store built to scale.',
+            features: ['Custom styling', 'Categories and analytics', 'Shipping and payment setup'],
+          },
+          {
+            id: 'shop-advanced',
+            name: 'Advanced store',
+            price: '$2,000+',
+            unit: 'one-time',
+            tagline: 'Subscriptions, memberships and more.',
+            features: ['Custom workflows', 'Subscriptions and memberships', 'Integrations'],
+          },
+        ],
+      },
+      {
+        title: 'AI websites & business automation',
+        range: '$699 - $4,000+',
+        packages: [
+          {
+            id: 'ai-lead-starter',
+            name: 'AI Lead Starter',
+            price: '$699',
+            unit: 'one-time',
+            tagline: 'Capture and follow up on every lead.',
+            features: ['Landing page and lead capture', 'Basic CRM', 'One simple workflow'],
+          },
+          {
+            id: 'ai-growth',
+            name: 'AI Growth',
+            price: '$1,499',
+            unit: 'one-time',
+            badge: 'Recommended',
+            highlight: true,
+            tagline: 'Qualify and book leads automatically.',
+            features: ['Funnel and AI chat qualification', 'Booking and reminders', 'CRM pipeline'],
+          },
+          {
+            id: 'ai-advanced',
+            name: 'AI Advanced',
+            price: '$2,500 - $4,000+',
+            unit: 'one-time',
+            tagline: 'Custom agents and integrations.',
+            features: ['Custom agent', 'Multiple workflows and integrations', 'Reporting'],
+          },
+        ],
+      },
+    ],
+    support: [
+      { service: 'Website care', price: '$29 - $79 / month', scope: 'Updates, backups where applicable, basic support.' },
+      { service: 'E-commerce support', price: '$99 - $299 / month', scope: 'Store maintenance and agreed support hours.' },
+      { service: 'AI monitoring & optimisation', price: '$149 - $799+ / month', scope: 'Workflow monitoring, fixes, optimisation; usage may be extra.' },
+    ],
+  },
+  {
+    id: 'automation',
+    label: 'AI CRM & automation',
+    heading: 'AI CRM & business automation',
+    description:
+      'AI receptionist, customer messaging, CRM, reports and follow-up workflows in one connected system.',
+    groups: [
+      {
+        title: 'One-time setup',
+        packages: [
+          {
+            id: 'crm-starter',
+            name: 'CRM Starter Setup',
+            price: '$499',
+            unit: 'one-time setup',
+            tagline: 'Get your customer information and core follow-up process organised.',
+            features: [
+              'CRM workspace and pipeline setup',
+              'Customer/contact records and basic fields',
+              'Lead capture form or one simple integration',
+              'Basic dashboard and report setup',
+              'One simple automated follow-up workflow',
+            ],
+          },
+          {
+            id: 'business-automation',
+            name: 'Business Automation Setup',
+            price: '$999',
+            unit: 'one-time setup',
+            badge: 'Recommended',
+            highlight: true,
+            tagline: 'Connect more of your lead journey and reduce repetitive admin.',
+            features: [
+              'Everything in CRM Starter',
+              'Custom pipeline stages and lead-source tracking',
+              'Website/form or messaging integration',
+              'Automated email/SMS follow-up sequence',
+              'Appointment booking workflow',
+              'Business-specific AI assistant configuration',
+            ],
+          },
+          {
+            id: 'ai-receptionist-setup',
+            name: 'AI Receptionist Setup',
+            price: '$1,499',
+            unit: 'one-time setup',
+            tagline: 'Add an AI voice receptionist to handle routine calls.',
+            features: [
+              'Everything in Business Automation',
+              'AI voice receptionist and knowledge base',
+              'Call routing and lead qualification',
+              'Appointment booking or callback capture',
+              'Call summaries and CRM logging',
+              'Testing and handover',
+            ],
+          },
+          {
+            id: 'complete-ai-system',
+            name: 'Complete AI Business System',
+            price: '$1,999',
+            unit: 'one-time setup',
+            badge: 'Full system',
+            tagline: 'CRM, voice and reporting together for growing teams.',
+            features: [
+              'CRM, pipeline and management dashboard',
+              'AI voice receptionist configuration',
+              'Customer messaging and follow-up workflows',
+              'Lead tracking and appointment automation',
+              'Business reporting dashboard',
+              'Multiple integrations, within agreed scope',
+            ],
+          },
+        ],
+      },
+      {
+        title: 'Monthly platform & support',
+        packages: [
+          {
+            id: 'platform-essential',
+            name: 'Essential',
+            price: '$40',
+            unit: 'per month',
+            tagline: 'Core CRM access and simple automation.',
+            features: ['CRM and contact management', 'Basic pipeline and dashboard', 'One active simple workflow', 'Email support', 'Small usage allowance'],
+          },
+          {
+            id: 'platform-growth',
+            name: 'Growth',
+            price: '$100',
+            unit: 'per month',
+            badge: 'Recommended',
+            highlight: true,
+            tagline: 'More automation and visibility for a growing team.',
+            features: ['Everything in Essential', 'Additional follow-up workflows', 'Customer messaging automation', 'Monthly reporting dashboard', 'Priority business-hours support'],
+          },
+          {
+            id: 'platform-receptionist',
+            name: 'AI Receptionist',
+            price: '$200',
+            unit: 'per month',
+            tagline: 'CRM plus AI voice receptionist support.',
+            features: ['Everything in Growth', 'AI voice receptionist access', 'Call summaries and lead logging', 'Appointment/callback workflow', 'Usage allowance based on plan'],
+          },
+          {
+            id: 'platform-custom',
+            name: 'Custom / Multi-location',
+            price: 'Custom',
+            unit: 'quote',
+            tagline: 'For higher usage, multiple teams and complex integrations.',
+            features: ['Multiple locations or teams', 'Expanded permissions and reporting', 'Custom integrations and workflows', 'Higher usage allowance', 'Dedicated support options'],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'video',
+    label: 'Video & creative',
+    heading: 'Videography & creative content',
+    description:
+      'Short-form, YouTube, promotional videos, motion graphics and AI video. Editing-only rates assume you supply footage.',
+    groups: [
+      {
+        title: 'Short-form content',
+        packages: [
+          { id: 'sf-basic', name: 'Basic Edit', price: '$25', unit: 'per video', tagline: '15-60 seconds. Clean, simple edits.', features: ['Cuts and pacing', 'Captions and basic transitions', 'Music and basic sound effects', '1 revision'] },
+          { id: 'sf-creator', name: 'Creator Edit', price: '$45', unit: 'per video', badge: 'Most popular', highlight: true, tagline: '15-90 seconds. Built around story and retention.', features: ['Hook-focused pacing', 'Captions and selected B-roll', 'Sound design and colour correction', '2 revisions'] },
+          { id: 'sf-premium', name: 'Premium Edit', price: '$85+', unit: 'per video', tagline: 'Up to 90 seconds. Polished and effects-heavy.', features: ['Advanced pacing and sound design', 'Custom motion graphics or effects', 'Detailed colour treatment', '2 revisions'] },
+          { id: 'sf-monthly', name: 'Monthly Short-Form', price: 'From $180', unit: 'per month', badge: 'Monthly', tagline: '4 videos per month.', features: ['4 Creator edits', 'Consistent editing style', 'Batch delivery by schedule', 'Footage supplied by client'] },
+        ],
+      },
+      {
+        title: 'Long-form YouTube',
+        packages: [
+          { id: 'yt-standard', name: 'Standard YouTube', price: '$125', unit: 'per video', tagline: 'Up to 10 finished minutes.', features: ['Cuts and pacing', 'Basic audio and colour correction', 'Simple titles and transitions', 'Light supplied B-roll'] },
+          { id: 'yt-retention', name: 'Retention-Focused', price: '$225', unit: 'per video', badge: 'Popular', highlight: true, tagline: 'More engaging storytelling.', features: ['Stronger opening and narrative flow', 'B-roll and sound design', 'Animated text and graphics', '2 revisions'] },
+          { id: 'yt-cinematic', name: 'Cinematic / Documentary', price: '$350+', unit: 'per video', tagline: 'Detailed stories and complex edits.', features: ['Layered sound design', 'Advanced graphics and grading', 'Complex B-roll / compositing', 'Scope-based quote'] },
+          { id: 'yt-monthly', name: 'YouTube Monthly', price: '$450', unit: 'per month', badge: 'Monthly', tagline: '4 standard videos, up to 10 min each.', features: ['4 Standard YouTube edits', 'Consistent format and workflow', 'Scheduled delivery', 'Thumbnails and uploads extra'] },
+        ],
+      },
+      {
+        title: 'Promotional videos & motion graphics',
+        packages: [
+          { id: 'promo-video', name: 'Promotional Video', price: '$175 - $400', unit: '15-60 sec', tagline: 'Turn footage into a clear promo.', features: ['Music, titles and colour correction', 'Pacing suited to the offer', '1 main format', '2 revisions'] },
+          { id: 'motion-graphics', name: 'Motion Graphics', price: '$150 - $350', unit: '15-30 sec', tagline: 'Branded animation for social and ads.', features: ['Animated text and shapes', 'Icons, transitions and sound effects', 'Brand colours and typography', '2 revisions'] },
+          { id: 'explainer', name: 'Animated Explainer', price: '$350 - $800+', unit: '30-60 sec', tagline: 'Explain your product or service.', features: ['Basic script/storyboard scope', '2D animation and graphics', 'Voiceover coordination', 'Complexity quoted separately'] },
+          { id: 'logo-animation', name: 'Logo Animation', price: '$75 - $200', unit: '5-15 sec', tagline: 'A polished animated logo reveal.', features: ['Logo reveal animation', 'Basic sound effects', 'One final export', 'Complex 3D quoted separately'] },
+        ],
+      },
+      {
+        title: 'AI-generated video',
+        packages: [
+          { id: 'ai-social-clip', name: 'AI Social Clip', price: '$75 - $150', unit: '15-30 sec', tagline: 'For social media or concept testing.', features: ['AI-generated visuals', 'Editing, music and sound design', 'Defined number of scenes', '1 revision round'] },
+          { id: 'ai-commercial', name: 'AI Brand Commercial', price: '$225 - $500', unit: '30-60 sec', badge: 'Popular', highlight: true, tagline: 'Several AI scenes, one strong concept.', features: ['Creative direction and shot planning', 'AI visuals and edit', 'Sound design and brand integration', '2 revisions'] },
+          { id: 'ai-film', name: 'Cinematic AI Film', price: '$600 - $1,500+', unit: '60-120 sec', tagline: 'Ambitious concepts and finishing.', features: ['Scene planning and continuity', 'Advanced editing / compositing', 'Detailed sound design', 'Custom quote by brief'] },
+          { id: 'ai-hybrid', name: 'Hybrid AI Production', price: '$150+', unit: 'by project', tagline: 'Real footage meets AI scenes.', features: ['Use supplied footage where possible', 'AI inserts or backgrounds', 'Colour and sound finishing', 'Scope confirmed before work'] },
+        ],
+      },
+    ],
+    addons: [
+      { name: 'YouTube thumbnail', price: '$15 - $35' },
+      { name: 'Scriptwriting for short video', price: '$25 - $60' },
+      { name: 'Extra aspect-ratio export', price: '$8 - $15' },
+      { name: 'Additional short-form ad variation', price: '$35 - $100' },
+      { name: 'AI voiceover / voice generation', price: '$15 - $50' },
+      { name: 'Rush delivery (when available)', price: '+25 - 50%' },
+      { name: 'Extra revision round', price: '$10 - $30' },
+    ],
+  },
+]
+
+export const importantDetails = [
+  { title: 'Advertising budget', body: 'Meta and Google ad spend is paid directly by the client and is not included in monthly management fees.' },
+  { title: 'Software and usage fees', body: 'Hosting, domain renewals, premium tools, CRM subscriptions, AI usage, phone/SMS charges and other third-party costs are separate unless specifically listed.' },
+  { title: 'Scope and revisions', body: 'Video lengths, revision rounds, page counts, campaigns, workflows, response times and publishing responsibilities are confirmed in writing before kickoff.' },
+  { title: 'Website work', body: 'Website packages use an agreed template and defined page scope. Custom software, e-commerce complexity, copywriting beyond the agreed scope and major redesigns may require a separate quote.' },
+  { title: 'AI automation', body: 'Automations depend on your systems, data, integrations and provider limits. Ongoing AI/telephony usage costs are billed separately. Critical actions and uncertain cases always have clear escalation to a human.' },
+  { title: 'Results', body: 'Marketing performance depends on offer, market, competition, budget, website and sales follow-up. Specific lead, revenue or ROAS outcomes are not guaranteed.' },
+  { title: 'Payment', body: 'Monthly services are billed monthly in advance. One-time projects follow an agreed payment schedule, typically 50% upfront and 50% before launch.' },
+]
+
+export const allPackages = pricingTabs.flatMap((tab) =>
+  tab.groups.flatMap((group) =>
+    group.packages.map((pkg) => ({
+      ...pkg,
+      tabId: tab.id,
+      label: group.title ? `${group.title}: ${pkg.name}` : `${tab.label}: ${pkg.name}`,
+    })),
+  ),
+)
+
+export function findPackage(id) {
+  return allPackages.find((pkg) => pkg.id === id)
+}
