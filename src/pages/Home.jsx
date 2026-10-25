@@ -1,7 +1,5 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import HeroArt from '../components/HeroArt.jsx'
-import BrandFilmModal from '../components/BrandFilmModal.jsx'
 import ServicesGrid from '../components/ServicesGrid.jsx'
 import PricingPreview from '../components/PricingPreview.jsx'
 import WorkCard from '../components/WorkCard.jsx'
@@ -11,14 +9,17 @@ import { useBookCall } from '../components/BookCallModal.jsx'
 import { work } from '../data/work.js'
 
 export default function Home() {
-  const [filmOpen, setFilmOpen] = useState(false)
   const { openBookCall } = useBookCall()
 
   return (
     <>
-      <section className="bg-ink text-white">
-        <div className="container-x grid items-center gap-10 py-14 md:grid-cols-[1.1fr_1fr] md:py-20">
-          <div className="animate-[fadeIn_0.8s_ease]">
+      <section className="relative overflow-hidden bg-ink text-white">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_78%,rgba(240,78,15,0.34),rgba(240,78,15,0.08)_42%,transparent_70%)] md:bg-[radial-gradient(ellipse_at_68%_50%,rgba(240,78,15,0.32),rgba(240,78,15,0.08)_40%,transparent_72%)]"
+          aria-hidden="true"
+        />
+        <div className="container-x relative grid items-center gap-8 py-14 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:gap-6 md:py-20 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">
+          <div className="min-w-0 animate-[fadeIn_0.8s_ease]">
             <h1 className="text-5xl font-extrabold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
               Get found.
               <br />
@@ -39,7 +40,7 @@ export default function Home() {
             </div>
           </div>
           <div className="animate-[fadeIn_1s_ease]">
-            <HeroArt onPlay={() => setFilmOpen(true)} />
+            <HeroArt />
           </div>
         </div>
       </section>
@@ -90,8 +91,6 @@ export default function Home() {
       </section>
 
       <CtaBanner />
-
-      <BrandFilmModal open={filmOpen} onClose={() => setFilmOpen(false)} />
     </>
   )
 }
