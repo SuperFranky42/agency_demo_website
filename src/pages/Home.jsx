@@ -107,7 +107,7 @@ export default function Home() {
             </Link>
           </Reveal>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {work.map((item, i) => (
+            {work.slice(0, 3).map((item, i) => (
               <Reveal key={item.slug} delay={i * 90}>
                 <WorkCard item={item} />
               </Reveal>

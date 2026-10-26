@@ -21,6 +21,7 @@ export default function Work() {
               <div>
                 <p className="eyebrow">
                   {item.category} &middot; {item.year}
+                  {item.status && <> &middot; {item.status}</>}
                 </p>
                 <h2 className="mt-2 font-serif text-3xl sm:text-4xl">{item.client}</h2>
                 <p className="mt-4 text-muted">{item.summary}</p>

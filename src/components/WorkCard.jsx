@@ -8,9 +8,23 @@ export default function WorkCard({ item }) {
       className="group relative block aspect-[4/3] overflow-hidden rounded-sm bg-ink"
     >
       <div className="absolute inset-0 transition duration-500 group-hover:scale-105">
-        <WorkVisual type={item.visual} />
+        {item.image ? (
+          <img
+            src={item.image}
+            alt={item.client}
+            loading="lazy"
+            className="h-full w-full object-cover object-top"
+          />
+        ) : (
+          <WorkVisual type={item.visual} />
+        )}
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+      {item.status && (
+        <span className="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-accent backdrop-blur-sm sm:left-5 sm:top-5">
+          {item.status}
+        </span>
+      )}
       <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
         <p className="flex items-center gap-2 text-sm font-medium text-accent">
           <span className="h-2 w-2 rounded-full bg-accent" />
