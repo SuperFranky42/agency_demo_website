@@ -6,7 +6,11 @@ export default function Footer() {
     <footer className="border-t border-line bg-ink">
       <div className="container-x grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Link to="/" className="text-2xl font-black tracking-tight">
+          <Link to="/" className="inline-flex items-center gap-2.5 text-2xl font-black tracking-tight" aria-label="AEGIS home">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="h-8 w-8" aria-hidden="true">
+              <path d="M16 6 L25 26 H20.5 L16 15.5 L11.5 26 H7 Z" fill="currentColor" />
+              <circle cx="16" cy="22" r="2.5" fill="#f04e0f" />
+            </svg>
             AEGIS
           </Link>
           <p className="mt-3 max-w-xs text-sm text-muted">
