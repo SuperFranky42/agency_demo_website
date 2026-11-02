@@ -3,15 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <title>Forms</title>
+    <style>
+      /* Keep this registration page off-screen. Do not use the hidden attribute:
+         Netlify treats those fields as hidden and then the submission list has no title. */
+      body { position: absolute; left: -9999px; }
+    </style>
   </head>
   <body>
-    <!-- Static copies so Netlify can register these forms at deploy time. -->
-    <form name="quote" action="/form-received" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <!-- Static copies so Netlify can register these forms at deploy time.
+         Name must be the first normal text field so the submissions list shows it. -->
+    <form name="quote" action="/form-received" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="quote" />
       <input type="hidden" name="subject" value="New quote request" />
-      <p hidden>
-        <label>Do not fill this out: <input name="bot-field" /></label>
-      </p>
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="text" name="business" />
@@ -26,19 +29,22 @@
       <input type="text" name="existing" />
       <input type="text" name="reference" />
       <textarea name="notes"></textarea>
-    </form>
-
-    <form name="book-call" action="/form-received" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
-      <input type="hidden" name="form-name" value="book-call" />
-      <input type="hidden" name="subject" value="New call request" />
-      <p hidden>
+      <p>
         <label>Do not fill this out: <input name="bot-field" /></label>
       </p>
+    </form>
+
+    <form name="book-call" action="/form-received" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="book-call" />
+      <input type="hidden" name="subject" value="New call request" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="text" name="topic" />
       <input type="text" name="reference" />
       <textarea name="notes"></textarea>
+      <p>
+        <label>Do not fill this out: <input name="bot-field" /></label>
+      </p>
     </form>
   </body>
 </html>
