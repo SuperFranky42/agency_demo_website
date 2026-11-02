@@ -289,13 +289,14 @@ function RevealWhenDrawn({ onReady }) {
 export default function Platforms3D() {
   const els = useRef([])
   const [ready, setReady] = useState(false)
+  const [grabbed, setGrabbed] = useState(false)
   return (
     <div className={`hero-scene absolute inset-0${ready ? ' is-ready' : ''}`}>
       <Canvas
         camera={{ position: [0, 2.2, 8], fov: 34 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true }}
-        style={{ touchAction: 'pan-y', width: '100%', height: '100%' }}
+        style={{ touchAction: 'pan-y pinch-zoom', width: '100%', height: '100%' }}
         onCreated={({ gl }) => {
           gl.setClearColor(0x000000, 0)
         }}
@@ -303,7 +304,7 @@ export default function Platforms3D() {
         <FitCamera />
         <RevealWhenDrawn onReady={() => setReady(true)} />
         <SceneLights />
-        <ParallaxGroup strength={0.62} spin={0.06} orbit>
+        <ParallaxGroup strength={0.62} spin={0.06} orbit onGrab={() => setGrabbed(true)}>
           <group>
             <Motes />
             {PLATFORMS.map((p, i) => (
@@ -316,6 +317,9 @@ export default function Platforms3D() {
         </ParallaxGroup>
       </Canvas>
       <LabelLayer items={LABELS} els={els} />
+      <p className={`hero-touch-hint pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs font-medium text-white/60${grabbed ? ' is-hidden' : ''}`}>
+        Swipe sideways to rotate · hold, then drag to tilt
+      </p>
     </div>
   )
 }

@@ -50,9 +50,13 @@ export function LabelProjector({ items, els }) {
 const YAW_LIMIT = 1.05
 const PITCH_MIN = -0.48
 const PITCH_MAX = 0.38
+const TOUCH_SLOP = 6
+const TOUCH_HOLD_MS = 220
 
-export function ParallaxGroup({ children, strength = 0.25, baseRotation = [0, 0, 0], spin = 0, orbit = false }) {
+export function ParallaxGroup({ children, strength = 0.25, baseRotation = [0, 0, 0], spin = 0, orbit = false, onGrab }) {
   const ref = useRef()
+  const grabRef = useRef(onGrab)
+  grabRef.current = onGrab
   const gl = useThree((state) => state.gl)
   const drag = useRef({
     active: false,
@@ -65,6 +69,11 @@ export function ParallaxGroup({ children, strength = 0.25, baseRotation = [0, 0,
     velYaw: 0,
     velPitch: 0,
     held: false,
+    touch: false,
+    mode: 'idle',
+    startX: 0,
+    startY: 0,
+    startT: 0,
   })
   const reduceMotion = useMemo(
     () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -79,13 +88,16 @@ export function ParallaxGroup({ children, strength = 0.25, baseRotation = [0, 0,
     const onDown = (event) => {
       if (event.button !== 0) return
       const d = drag.current
+      if (d.active) return
       const node = ref.current
       d.active = true
       d.held = true
       d.id = event.pointerId
-      d.lastX = event.clientX
-      d.lastY = event.clientY
-      d.lastT = performance.now()
+      d.touch = event.pointerType !== 'mouse'
+      d.mode = d.touch ? 'pending' : 'rotate'
+      d.startX = d.lastX = event.clientX
+      d.startY = d.lastY = event.clientY
+      d.startT = d.lastT = performance.now()
       d.velYaw = 0
       d.velPitch = 0
       if (node) {
@@ -105,6 +117,15 @@ export function ParallaxGroup({ children, strength = 0.25, baseRotation = [0, 0,
       const d = drag.current
       if (!d.active || event.pointerId !== d.id) return
       const now = performance.now()
+      // Touch: a sideways swipe or press-and-hold grabs the scene; a vertical swipe is left to page scrolling.
+      if (d.mode === 'pending') {
+        const dx = event.clientX - d.startX
+        const dy = event.clientY - d.startY
+        if (Math.hypot(dx, dy) < TOUCH_SLOP) return
+        d.mode = now - d.startT >= TOUCH_HOLD_MS || Math.abs(dx) > Math.abs(dy) ? 'rotate' : 'scroll'
+        if (d.mode === 'rotate') grabRef.current?.()
+      }
+      if (d.mode !== 'rotate') return
       const dt = Math.max((now - d.lastT) / 1000, 1 / 120)
       const width = Math.max(el.clientWidth, 1)
       const height = Math.max(el.clientHeight, 1)
@@ -124,7 +145,9 @@ export function ParallaxGroup({ children, strength = 0.25, baseRotation = [0, 0,
       if (!d.active || event.pointerId !== d.id) return
       d.active = false
       d.id = null
-      if (performance.now() - d.lastT > 80) {
+      const wasRotating = d.mode === 'rotate'
+      d.mode = 'idle'
+      if (!wasRotating || event.type === 'pointercancel' || performance.now() - d.lastT > 80) {
         d.velYaw = 0
         d.velPitch = 0
       }
@@ -137,7 +160,16 @@ export function ParallaxGroup({ children, strength = 0.25, baseRotation = [0, 0,
       el.style.cursor = el.dataset.hovering === '1' ? 'pointer' : 'grab'
     }
 
+    const onTouchMove = (event) => {
+      if (drag.current.mode === 'rotate' && event.cancelable) event.preventDefault()
+    }
+    const onContextMenu = (event) => {
+      if (drag.current.touch) event.preventDefault()
+    }
+
     el.addEventListener('pointerdown', onDown)
+    el.addEventListener('touchmove', onTouchMove, { passive: false })
+    el.addEventListener('contextmenu', onContextMenu)
     window.addEventListener('pointermove', onMove)
     window.addEventListener('pointerup', endDrag)
     window.addEventListener('pointercancel', endDrag)
@@ -145,6 +177,8 @@ export function ParallaxGroup({ children, strength = 0.25, baseRotation = [0, 0,
       delete el.dataset.dragging
       el.style.cursor = ''
       el.removeEventListener('pointerdown', onDown)
+      el.removeEventListener('touchmove', onTouchMove)
+      el.removeEventListener('contextmenu', onContextMenu)
       window.removeEventListener('pointermove', onMove)
       window.removeEventListener('pointerup', endDrag)
       window.removeEventListener('pointercancel', endDrag)

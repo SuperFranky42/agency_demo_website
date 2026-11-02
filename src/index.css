@@ -132,6 +132,22 @@ body {
 }
 .hero-scene canvas {
   cursor: grab;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-touch-hint {
+  display: none;
+  transition: opacity 0.6s ease;
+}
+.hero-touch-hint.is-hidden {
+  opacity: 0;
+}
+@media (hover: none) and (pointer: coarse) {
+  .hero-touch-hint {
+    display: block;
+  }
 }
 .hero-scene.is-ready {
   opacity: 1;
