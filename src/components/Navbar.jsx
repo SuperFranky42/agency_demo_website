@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useBookCall } from './BookCallModal.jsx'
+import Logo from './Logo.jsx'
 
 const links = [
   { to: '/work', label: 'Work' },
@@ -30,11 +31,9 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-40 border-b border-transparent bg-ink/90 backdrop-blur ${scrolled ? 'border-line' : ''}`}
     >
-      <nav className="container-x flex h-16 items-center justify-between">
+      <nav className="container-x flex h-20 items-center justify-between">
         <div className="flex items-center gap-12">
-          <Link to="/" className="text-2xl font-black tracking-tight" aria-label="AEGIS home">
-            AEGIS
-          </Link>
+          <Logo />
           <ul className="hidden items-center gap-10 md:flex">
             {links.map((l) => (
               <li key={l.to}>

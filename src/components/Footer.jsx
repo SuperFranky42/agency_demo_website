@@ -1,19 +1,14 @@
 import { Link } from 'react-router-dom'
 import { services } from '../data/services.js'
+import Logo from './Logo.jsx'
 
 export default function Footer() {
   return (
     <footer className="border-t border-line bg-ink">
       <div className="container-x grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Link to="/" className="inline-flex items-center gap-2.5 text-2xl font-black tracking-tight" aria-label="AEGIS home">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="h-8 w-8" aria-hidden="true">
-              <path d="M16 6 L25 26 H20.5 L16 15.5 L11.5 26 H7 Z" fill="currentColor" />
-              <circle cx="16" cy="22" r="2.5" fill="#f04e0f" />
-            </svg>
-            AEGIS
-          </Link>
-          <p className="mt-3 max-w-xs text-sm text-muted">
+          <Logo variant="lockup" />
+          <p className="mt-4 max-w-xs text-sm text-muted">
             One partner for your brand, marketing and lead follow-up systems.
           </p>
         </div>
@@ -40,13 +35,13 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-semibold">Contact</h3>
           <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li><a href="mailto:hello@aegis-agency.com" className="hover:text-accent">hello@aegis-agency.com</a></li>
+            <li><a href="mailto:hello@leadcraft.com" className="hover:text-accent">hello@leadcraft.com</a></li>
             <li>Mon - Fri, 9:00 - 18:00</li>
           </ul>
         </div>
       </div>
       <div className="border-t border-line py-5 text-center text-sm text-white/60">
-        &copy; {new Date().getFullYear()} AEGIS Agency. All rights reserved.
+        &copy; {new Date().getFullYear()} LeadCraft. All rights reserved.
       </div>
     </footer>
   )

@@ -4,7 +4,7 @@ import { allPackages, findPackage } from '../data/pricing.js'
 import { useBookCall } from '../components/BookCallModal.jsx'
 import { appendToList, makeReference } from '../lib/storage.js'
 
-const QUOTES_KEY = 'aegis_quotes'
+const QUOTES_KEY = 'leadcraft_quotes'
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const NEEDS = [

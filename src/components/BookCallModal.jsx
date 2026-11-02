@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import Modal from './Modal.jsx'
 import { appendToList, makeReference } from '../lib/storage.js'
 
-const BOOKINGS_KEY = 'aegis_bookings'
+const BOOKINGS_KEY = 'leadcraft_bookings'
 const TOPICS = ['New business launch', 'Monthly marketing', 'Website or funnel', 'AI automation / CRM', 'Video and creative', 'Not sure yet']
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
