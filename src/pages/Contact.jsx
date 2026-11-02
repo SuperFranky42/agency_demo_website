@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { allPackages, findPackage } from '../data/pricing.js'
 import { useBookCall } from '../components/BookCallModal.jsx'
-import { appendToList, makeReference } from '../lib/storage.js'
+import { makeReference } from '../lib/storage.js'
+import { submitForm } from '../lib/submitForm.js'
 
-const QUOTES_KEY = 'leadcraft_quotes'
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const NEEDS = [
@@ -87,6 +87,7 @@ export default function Contact() {
   const [errors, setErrors] = useState({})
   const [submitted, setSubmitted] = useState(null)
   const [sending, setSending] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
   const toggleFeature = (feat) =>
@@ -107,22 +108,46 @@ export default function Contact() {
     return next
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     const next = validate()
     setErrors(next)
+    setSubmitError('')
     if (Object.keys(next).length) {
       document.getElementById(`q-${Object.keys(next)[0]}`)?.focus()
       return
     }
     setSending(true)
-    setTimeout(() => {
-      const entry = { reference: makeReference('QTE'), ...form, createdAt: new Date().toISOString() }
-      appendToList(QUOTES_KEY, entry)
+    const entry = { reference: makeReference('QTE'), ...form, createdAt: new Date().toISOString() }
+    const pkg = findPackage(form.packageId)
+    try {
+      await submitForm(
+        'quote',
+        {
+          name: form.name.trim(),
+          email: form.email.trim(),
+          business: form.business.trim(),
+          industry: form.industry.trim(),
+          website: form.website.trim(),
+          need: NEEDS.find((n) => n.id === form.need)?.label ?? form.need,
+          package: pkg ? `${pkg.label} (${pkg.price})` : 'No specific package',
+          outcome: form.outcome,
+          features: form.features.join(', '),
+          budget: form.budget,
+          timeline: form.timeline,
+          existing: form.existing,
+          notes: form.notes.trim(),
+          reference: entry.reference,
+        },
+        'New quote request',
+      )
       setSubmitted(entry)
-      setSending(false)
       window.scrollTo({ top: 0, behavior: 'smooth' })
-    }, 700)
+    } catch {
+      setSubmitError('Something went wrong sending your request. Please try again.')
+    } finally {
+      setSending(false)
+    }
   }
 
   const selectedPackage = findPackage(form.packageId)
@@ -275,9 +300,12 @@ export default function Contact() {
 
             <div className="flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-xs text-muted">We reply within one business day. No spam, ever.</p>
-              <button type="submit" disabled={sending} className="btn btn-accent sm:min-w-48">
-                {sending ? 'Sending...' : 'Request my quote'}
-              </button>
+              <div className="flex flex-col items-start gap-2 sm:items-end">
+                {submitError && <p className="text-sm text-red-600">{submitError}</p>}
+                <button type="submit" disabled={sending} className="btn btn-accent sm:min-w-48">
+                  {sending ? 'Sending...' : 'Request my quote'}
+                </button>
+              </div>
             </div>
           </form>
 

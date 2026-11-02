@@ -1,8 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import Modal from './Modal.jsx'
-import { appendToList, makeReference } from '../lib/storage.js'
+import { makeReference } from '../lib/storage.js'
+import { submitForm } from '../lib/submitForm.js'
 
-const BOOKINGS_KEY = 'leadcraft_bookings'
 const TOPICS = ['New business launch', 'Monthly marketing', 'Website or funnel', 'AI automation / CRM', 'Video and creative', 'Not sure yet']
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -31,22 +31,42 @@ function BookCallFlow({ onClose }) {
   const [form, setForm] = useState({ name: '', email: '', topic: TOPICS[0], notes: '' })
   const [errors, setErrors] = useState({})
   const [booking, setBooking] = useState(null)
+  const [sending, setSending] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   useEffect(() => {
     if (!booking) return
     rootRef.current?.parentElement?.scrollTo({ top: 0 })
   }, [booking])
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
     const next = {}
     if (!form.name.trim()) next.name = 'Please enter your name.'
     if (!EMAIL_RE.test(form.email)) next.email = 'Please enter a valid email.'
     setErrors(next)
+    setSubmitError('')
     if (Object.keys(next).length) return
+    setSending(true)
     const entry = { reference: makeReference('CALL'), ...form, createdAt: new Date().toISOString() }
-    appendToList(BOOKINGS_KEY, entry)
-    setBooking(entry)
+    try {
+      await submitForm(
+        'book-call',
+        {
+          name: form.name.trim(),
+          email: form.email.trim(),
+          topic: form.topic,
+          notes: form.notes.trim(),
+          reference: entry.reference,
+        },
+        'New call request',
+      )
+      setBooking(entry)
+    } catch {
+      setSubmitError('Something went wrong sending your request. Please try again.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -95,8 +115,9 @@ function BookCallFlow({ onClose }) {
                 <label className="mb-1.5 block text-sm font-medium" htmlFor="bc-notes">Anything we should know? <span className="text-muted">(optional)</span></label>
                 <textarea id="bc-notes" rows={3} className="field" value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} />
               </div>
-              <button type="submit" className="btn btn-accent w-full">
-                Request a call
+              {submitError && <p className="text-sm text-red-600">{submitError}</p>}
+              <button type="submit" disabled={sending} className="btn btn-accent w-full">
+                {sending ? 'Sending...' : 'Request a call'}
               </button>
             </form>
           </>
