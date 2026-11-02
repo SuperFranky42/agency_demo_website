@@ -35,7 +35,7 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-semibold">Contact</h3>
           <ul className="mt-3 space-y-2 text-sm text-muted">
-            <li><a href="mailto:hello@leadcraft.com" className="hover:text-accent">hello@leadcraft.com</a></li>
+            <li><a href="mailto:leadcraftmarketingagency@gmail.com" className="hover:text-accent">leadcraftmarketingagency@gmail.com</a></li>
             <li>Mon - Fri, 9:00 - 18:00</li>
           </ul>
         </div>
