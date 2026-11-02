@@ -19,7 +19,7 @@ export default function Services() {
         automatically.
       </PageHeader>
 
-      <nav className="sticky top-16 z-30 border-b border-line bg-ink/95 backdrop-blur">
+      <nav className="sticky top-20 z-30 border-b border-line bg-ink/95 backdrop-blur">
         <div className="container-x no-scrollbar flex gap-6 overflow-x-auto py-3 text-sm font-medium">
           {services.map((s) => (
             <a key={s.id} href={`#${s.id}`} className="shrink-0 hover:text-accent">
@@ -30,7 +30,7 @@ export default function Services() {
       </nav>
 
       {services.map((s, i) => (
-        <section key={s.id} id={s.id} className={`scroll-mt-32 py-16 sm:py-20 ${i % 2 === 1 ? 'bg-ink-soft' : ''}`}>
+        <section key={s.id} id={s.id} className={`scroll-mt-32 py-16 sm:py-20 ${i % 2 === 1 ? 'bg-white/[0.03]' : ''}`}>
           <div className="container-x grid gap-10 md:grid-cols-[1fr_1.2fr]">
             <Reveal>
               <span className="font-serif text-5xl text-accent">{s.number}</span>
@@ -52,7 +52,7 @@ export default function Services() {
             <Reveal delay={120}>
               <ul className="grid gap-3 sm:grid-cols-2">
                 {s.deliverables.map((d) => (
-                  <li key={d} className="flex gap-3 rounded-md border border-line bg-white/[0.04] p-4 text-sm">
+                  <li key={d} className="panel flex gap-3 rounded-md border border-line bg-white/[0.04] p-4 text-sm">
                     <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent" />
                     {d}
                   </li>
@@ -71,7 +71,7 @@ export default function Services() {
           </Reveal>
           <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {process.map((p, i) => (
-              <Reveal as="li" key={p.step} delay={i * 90} className="rounded-md border border-line p-6">
+              <Reveal as="li" key={p.step} delay={i * 90} className="panel rounded-md border border-line p-6">
                 <span className="font-serif text-2xl text-accent">0{i + 1}</span>
                 <h3 className="mt-2 text-lg font-semibold">{p.step}</h3>
                 <p className="mt-2 text-sm text-muted">{p.body}</p>

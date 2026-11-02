@@ -50,7 +50,7 @@ export default function Pricing() {
         Starting prices in USD. Final scope and pricing are confirmed in a written proposal before any work begins.
       </PageHeader>
 
-      <div className="sticky top-16 z-30 border-b border-line bg-ink/95 backdrop-blur">
+      <div className="sticky top-20 z-30 border-b border-line bg-ink/95 backdrop-blur">
         <div className="container-x no-scrollbar flex gap-2 overflow-x-auto py-3" role="tablist">
           {pricingTabs.map((t) => (
             <button
@@ -134,7 +134,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-ink-soft py-14 sm:py-16">
+      <section className="border-t border-line bg-white/[0.03] py-14 sm:py-16">
         <div className="container-x grid gap-10 md:grid-cols-[1fr_1.5fr]">
           <div>
             <p className="eyebrow">Important details</p>

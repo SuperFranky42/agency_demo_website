@@ -25,7 +25,7 @@ function SparkIcon() {
 export default function PricingPreview() {
   return (
     <div className="grid gap-5 md:grid-cols-2">
-      <Reveal className="rounded-md border border-line bg-ink-soft p-6">
+      <Reveal className="panel rounded-md border border-line bg-ink-soft p-6">
         <div className="flex items-baseline justify-between">
           <h3 className="font-serif text-2xl">New business</h3>
           <span className="text-xs text-muted">one-time</span>
@@ -45,7 +45,7 @@ export default function PricingPreview() {
         </ul>
       </Reveal>
 
-      <Reveal delay={100} className="rounded-md border border-line bg-ink-soft p-6">
+      <Reveal delay={100} className="panel rounded-md border border-line bg-ink-soft p-6">
         <div className="flex items-baseline justify-between">
           <h3 className="font-serif text-2xl">Already operating</h3>
           <span className="text-xs text-muted">per month</span>

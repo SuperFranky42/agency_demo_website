@@ -8,7 +8,8 @@ export default function Layout() {
   return (
     <BookCallProvider>
       <ScrollToTop />
-      <div className="flex min-h-screen flex-col">
+      <div className="site-atmosphere" aria-hidden="true" />
+      <div className="relative z-10 flex min-h-screen flex-col">
         <Navbar />
         <main className="flex-1">
           <Outlet />

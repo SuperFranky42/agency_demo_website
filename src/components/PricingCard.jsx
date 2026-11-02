@@ -5,7 +5,7 @@ export default function PricingCard({ pkg, targeted = false }) {
   return (
     <article
       id={pkg.id}
-      className={`relative flex scroll-mt-40 flex-col rounded-md border bg-ink-soft p-6 transition ${
+      className={`panel relative flex scroll-mt-40 flex-col rounded-md border bg-ink-soft p-6 transition ${
         featured ? 'border-accent' : 'border-line'
       } ${targeted ? 'ring-2 ring-accent ring-offset-4 ring-offset-ink' : ''}`}
     >

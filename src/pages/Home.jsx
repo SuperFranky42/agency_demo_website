@@ -26,9 +26,9 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-ink text-white">
+      <section className="relative overflow-hidden text-white">
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_34%_at_50%_62%,rgba(240,78,15,0.36),rgba(240,78,15,0.1)_40%,transparent_68%)] [mask-image:linear-gradient(to_bottom,#000_58%,transparent_90%)] md:bg-[radial-gradient(ellipse_52%_62%_at_68%_46%,rgba(240,78,15,0.32),rgba(240,78,15,0.08)_40%,transparent_70%)] md:[mask-image:linear-gradient(to_bottom,#000_68%,transparent_96%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_34%_at_50%_62%,rgba(240,78,15,0.18),rgba(240,78,15,0.05)_40%,transparent_68%)] [mask-image:linear-gradient(to_bottom,#000_58%,transparent_90%)] md:bg-[radial-gradient(ellipse_52%_62%_at_68%_46%,rgba(240,78,15,0.16),rgba(240,78,15,0.04)_40%,transparent_70%)] md:[mask-image:linear-gradient(to_bottom,#000_68%,transparent_96%)]"
           aria-hidden="true"
         />
         <div className="container-x relative grid items-center gap-8 py-14 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:gap-6 md:py-20 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">

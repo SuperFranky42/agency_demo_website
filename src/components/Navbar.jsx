@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b border-transparent bg-ink/90 backdrop-blur ${scrolled ? 'border-line' : ''}`}
+      className={`sticky top-0 z-40 border-b border-white/10 backdrop-blur-xl backdrop-saturate-150 ${scrolled ? 'bg-[#110e0c]/50' : 'bg-[#110e0c]/25'}`}
     >
       <nav className="container-x flex h-20 items-center justify-between">
         <div className="flex items-center gap-12">
@@ -68,7 +68,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      <div className={`overflow-hidden border-t border-line transition-[max-height] duration-300 md:hidden ${open ? 'max-h-96' : 'max-h-0 border-t-0'}`}>
+      <div className={`overflow-hidden border-t border-white/10 bg-[#110e0c]/70 backdrop-blur-xl transition-[max-height] duration-300 md:hidden ${open ? 'max-h-96' : 'max-h-0 border-t-0'}`}>
         <ul className="container-x flex flex-col gap-1 py-4">
           {[...links, { to: '/contact', label: 'Get a quote' }].map((l) => (
             <li key={l.to}>

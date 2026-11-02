@@ -283,7 +283,7 @@ export default function Contact() {
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:h-fit">
             {selectedPackage && (
-              <div className="rounded-md border border-line bg-ink-soft p-6">
+              <div className="panel rounded-md border border-line bg-ink-soft p-6">
                 <p className="eyebrow">Selected package</p>
                 <h3 className="mt-2 font-serif text-2xl">{selectedPackage.name}</h3>
                 <p className="mt-1">
@@ -300,14 +300,14 @@ export default function Contact() {
                 </Link>
               </div>
             )}
-            <div className="rounded-md border border-line p-6">
+            <div className="panel rounded-md border border-line p-6">
               <h3 className="font-serif text-2xl">Prefer to talk?</h3>
               <p className="mt-2 text-sm text-muted">Book a free 30-minute strategy call and we will scope it together.</p>
               <button onClick={() => openBookCall()} className="btn btn-outline-dark mt-4 w-full">
                 Book a call
               </button>
             </div>
-            <div className="rounded-md border border-line p-6 text-sm">
+            <div className="panel rounded-md border border-line p-6 text-sm">
               <h3 className="font-semibold">What happens next</h3>
               <ol className="mt-3 space-y-2 text-muted">
                 <li><span className="font-semibold text-accent">1.</span> We review your answers.</li>

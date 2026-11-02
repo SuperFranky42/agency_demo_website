@@ -9,7 +9,7 @@ export default function ServicesGrid() {
         <Reveal key={s.id} delay={i * 80} className="h-full">
           <Link
             to={`/services#${s.id}`}
-            className="group relative flex h-full flex-col overflow-hidden rounded-md border border-line bg-ink-soft p-5 transition duration-300 hover:border-accent focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="panel group relative flex h-full flex-col overflow-hidden rounded-md border border-line bg-ink-soft p-5 transition duration-300 hover:border-accent focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             <span
               aria-hidden="true"
