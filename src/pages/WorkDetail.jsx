@@ -18,7 +18,7 @@ export default function WorkDetail() {
     <Fragment key={slug}>
       <section className="border-b border-line">
         <div className="container-x py-12 sm:py-16">
-          <Link to="/work" className="text-sm text-muted hover:text-accent">
+          <Link to="/work" className="text-sm text-muted hover:text-accent-dark">
             &larr; All work
           </Link>
           <p className="eyebrow mt-6">
@@ -52,8 +52,8 @@ export default function WorkDetail() {
               <h2 className="font-serif text-3xl">{item.status ? 'Progress so far' : 'Results'}</h2>
               <dl className="mt-6 grid gap-4 sm:grid-cols-3">
                 {item.results.map((r) => (
-                  <div key={r.label} className="rounded-md border border-line bg-ink-soft p-5">
-                    <dt className="text-3xl font-bold text-accent">{r.value}</dt>
+                  <div key={r.label} className="rounded-md border border-line bg-surface p-5">
+                    <dt className="text-3xl font-bold text-accent-dark">{r.value}</dt>
                     <dd className="mt-2 text-sm text-muted">{r.label}</dd>
                   </div>
                 ))}
@@ -89,8 +89,8 @@ export default function WorkDetail() {
                   <div
                     className={
                       i === 0
-                        ? 'max-h-[600px] overflow-y-auto rounded-md border border-line bg-ink-soft'
-                        : 'mx-auto max-h-[600px] max-w-[300px] overflow-y-auto rounded-[2rem] border-4 border-line bg-ink-soft'
+                        ? 'max-h-[600px] overflow-y-auto rounded-md border border-line bg-surface'
+                        : 'mx-auto max-h-[600px] max-w-[300px] overflow-y-auto rounded-[2rem] border-4 border-line bg-surface'
                     }
                   >
                     <img src={shot.src} alt={shot.alt} loading="lazy" className="block w-full" />
@@ -115,7 +115,7 @@ export default function WorkDetail() {
                 <Reveal
                   key={video.src}
                   delay={i * 90}
-                  className="aspect-[267/476] w-full max-w-[267px] overflow-hidden rounded-md border border-line bg-ink-soft"
+                  className="aspect-[267/476] w-full max-w-[267px] overflow-hidden rounded-md border border-line bg-surface"
                 >
                   <iframe
                     src={video.src}

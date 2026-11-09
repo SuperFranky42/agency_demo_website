@@ -25,11 +25,11 @@ export default function Navbar() {
   }, [])
 
   const linkClass = ({ isActive }) =>
-    `relative text-sm font-medium transition hover:text-accent ${isActive ? 'text-accent' : 'text-white'}`
+    `relative text-sm font-medium transition hover:text-accent-dark ${isActive ? 'text-accent-dark' : 'text-ink'}`
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b border-white/10 backdrop-blur-xl backdrop-saturate-150 ${scrolled ? 'bg-[#110e0c]/50' : 'bg-[#110e0c]/25'}`}
+      className={`sticky top-0 z-40 border-b border-ink/10 backdrop-blur-xl backdrop-saturate-150 ${scrolled ? 'bg-canvas/70' : 'bg-canvas/40'}`}
     >
       <nav className="container-x flex h-20 items-center justify-between">
         <div className="flex items-center gap-12">
@@ -46,7 +46,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Link to="/contact" className="text-sm font-medium hover:text-accent">
+          <Link to="/contact" className="text-sm font-medium hover:text-accent-dark">
             Get a quote
           </Link>
           <button onClick={() => openBookCall()} className="btn btn-accent !py-2.5">
@@ -61,18 +61,18 @@ export default function Navbar() {
           aria-expanded={open}
         >
           <span className="relative block h-3.5 w-6">
-            <span className={`absolute left-0 block h-0.5 w-6 bg-white transition ${open ? 'top-1.5 rotate-45' : 'top-0'}`} />
-            <span className={`absolute left-0 top-1.5 block h-0.5 w-6 bg-white transition ${open ? 'opacity-0' : ''}`} />
-            <span className={`absolute left-0 block h-0.5 w-6 bg-white transition ${open ? 'top-1.5 -rotate-45' : 'top-3'}`} />
+            <span className={`absolute left-0 block h-0.5 w-6 bg-ink transition ${open ? 'top-1.5 rotate-45' : 'top-0'}`} />
+            <span className={`absolute left-0 top-1.5 block h-0.5 w-6 bg-ink transition ${open ? 'opacity-0' : ''}`} />
+            <span className={`absolute left-0 block h-0.5 w-6 bg-ink transition ${open ? 'top-1.5 -rotate-45' : 'top-3'}`} />
           </span>
         </button>
       </nav>
 
-      <div className={`overflow-hidden border-t border-white/10 bg-[#110e0c]/70 backdrop-blur-xl transition-[max-height] duration-300 md:hidden ${open ? 'max-h-96' : 'max-h-0 border-t-0'}`}>
+      <div className={`overflow-hidden border-t border-ink/10 bg-canvas/90 backdrop-blur-xl transition-[max-height] duration-300 md:hidden ${open ? 'max-h-96' : 'max-h-0 border-t-0'}`}>
         <ul className="container-x flex flex-col gap-1 py-4">
           {[...links, { to: '/contact', label: 'Get a quote' }].map((l) => (
             <li key={l.to}>
-              <NavLink to={l.to} className={({ isActive }) => `block rounded-md px-2 py-3 text-base font-medium ${isActive ? 'text-accent' : ''}`}>
+              <NavLink to={l.to} className={({ isActive }) => `block rounded-md px-2 py-3 text-base font-medium ${isActive ? 'text-accent-dark' : ''}`}>
                 {l.label}
               </NavLink>
             </li>

@@ -25,11 +25,11 @@ export default function Modal({ open, onClose, title, children, size = 'max-w-lg
       <div
         ref={panelRef}
         tabIndex={-1}
-        className={`relative max-h-[92vh] w-full ${size} overflow-y-auto rounded-t-2xl bg-ink-soft text-white outline-none shadow-2xl sm:rounded-2xl`}
+        className={`relative max-h-[92vh] w-full ${size} overflow-y-auto rounded-t-2xl bg-surface text-ink outline-none shadow-2xl sm:rounded-2xl`}
       >
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full transition hover:bg-white/10"
+          className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full transition hover:bg-ink/10"
           aria-label="Close"
         >
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">

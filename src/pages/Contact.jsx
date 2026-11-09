@@ -44,7 +44,7 @@ function Chip({ selected, onClick, children }) {
       onClick={onClick}
       aria-pressed={selected}
       className={`rounded-full border px-3.5 py-1.5 text-sm transition ${
-        selected ? 'border-white bg-white text-ink' : 'border-white/25 hover:border-white'
+        selected ? 'border-ink bg-ink text-canvas' : 'border-ink/25 hover:border-ink'
       }`}
     >
       {children}
@@ -156,12 +156,12 @@ export default function Contact() {
     const pkg = findPackage(submitted.packageId)
     return (
       <section className="container-x max-w-2xl py-20 text-center">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-white">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-ink">
           <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
         </div>
         <h1 className="mt-6 font-serif text-4xl sm:text-5xl">Thanks, {submitted.name.split(' ')[0]}.</h1>
         <p className="mt-4 text-lg text-muted">
-          We have your request for <strong className="text-white">{submitted.business}</strong>. Expect a reply at{' '}
+          We have your request for <strong className="text-ink">{submitted.business}</strong>. Expect a reply at{' '}
           {submitted.email} within one business day with one clear recommendation.
         </p>
         <dl className="mx-auto mt-8 grid max-w-md gap-3 rounded-md border border-line p-5 text-left text-sm">
@@ -311,11 +311,11 @@ export default function Contact() {
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:h-fit">
             {selectedPackage && (
-              <div className="panel rounded-md border border-line bg-ink-soft p-6">
+              <div className="panel rounded-md border border-line bg-surface p-6">
                 <p className="eyebrow">Selected package</p>
                 <h3 className="mt-2 font-serif text-2xl">{selectedPackage.name}</h3>
                 <p className="mt-1">
-                  <span className="text-2xl font-bold text-accent">{selectedPackage.price}</span>{' '}
+                  <span className="text-2xl font-bold text-accent-dark">{selectedPackage.price}</span>{' '}
                   <span className="text-sm text-muted">{selectedPackage.unit}</span>
                 </p>
                 <ul className="mt-4 space-y-1.5 text-sm text-muted">
@@ -323,7 +323,7 @@ export default function Contact() {
                     <li key={f}>&middot; {f}</li>
                   ))}
                 </ul>
-                <Link to={`/pricing?tab=${selectedPackage.tabId}#${selectedPackage.id}`} className="mt-4 inline-block text-sm text-accent hover:underline">
+                <Link to={`/pricing?tab=${selectedPackage.tabId}#${selectedPackage.id}`} className="mt-4 inline-block text-sm text-accent-dark hover:underline">
                   View full details &rarr;
                 </Link>
               </div>
@@ -338,9 +338,9 @@ export default function Contact() {
             <div className="panel rounded-md border border-line p-6 text-sm">
               <h3 className="font-semibold">What happens next</h3>
               <ol className="mt-3 space-y-2 text-muted">
-                <li><span className="font-semibold text-accent">1.</span> We review your answers.</li>
-                <li><span className="font-semibold text-accent">2.</span> You get one clear recommendation and quote.</li>
-                <li><span className="font-semibold text-accent">3.</span> Scope is confirmed in writing before work begins.</li>
+                <li><span className="font-semibold text-accent-dark">1.</span> We review your answers.</li>
+                <li><span className="font-semibold text-accent-dark">2.</span> You get one clear recommendation and quote.</li>
+                <li><span className="font-semibold text-accent-dark">3.</span> Scope is confirmed in writing before work begins.</li>
               </ol>
             </div>
           </aside>

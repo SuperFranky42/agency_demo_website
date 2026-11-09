@@ -15,7 +15,7 @@ export default function Logo({ variant = 'wordmark' }) {
 
   return (
     <Link to="/" aria-label="LeadCraft home" className="inline-flex shrink-0">
-      <img src="/logo-wordmark.png" alt="" className="h-16 w-auto" />
+      <img src="/logo-wordmark-dark.png" alt="" className="h-16 w-auto" />
     </Link>
   )
 }

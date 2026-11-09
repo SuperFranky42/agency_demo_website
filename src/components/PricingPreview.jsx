@@ -25,7 +25,7 @@ function SparkIcon() {
 export default function PricingPreview() {
   return (
     <div className="grid gap-5 md:grid-cols-2">
-      <Reveal className="panel rounded-md border border-line bg-ink-soft p-6">
+      <Reveal className="panel rounded-md border border-line bg-surface p-6">
         <div className="flex items-baseline justify-between">
           <h3 className="font-serif text-2xl">New business</h3>
           <span className="text-xs text-muted">one-time</span>
@@ -37,15 +37,15 @@ export default function PricingPreview() {
                 to={`/pricing?tab=launch#${p.id}`}
                 className="group flex items-center justify-between py-3 transition hover:pl-1"
               >
-                <span className="group-hover:text-accent">{p.name}</span>
-                <span className="font-medium text-accent">{p.price}</span>
+                <span className="group-hover:text-accent-dark">{p.name}</span>
+                <span className="font-medium text-accent-dark">{p.price}</span>
               </Link>
             </li>
           ))}
         </ul>
       </Reveal>
 
-      <Reveal delay={100} className="panel rounded-md border border-line bg-ink-soft p-6">
+      <Reveal delay={100} className="panel rounded-md border border-line bg-surface p-6">
         <div className="flex items-baseline justify-between">
           <h3 className="font-serif text-2xl">Already operating</h3>
           <span className="text-xs text-muted">per month</span>
@@ -55,13 +55,13 @@ export default function PricingPreview() {
             <li key={p.id}>
               <Link
                 to={`/pricing?tab=monthly#${p.id}`}
-                className={`flex items-center justify-between rounded-sm px-2 py-3 transition ${p.featured ? 'bg-accent text-white hover:bg-accent-dark' : 'hover:bg-white/5 hover:text-accent'}`}
+                className={`flex items-center justify-between rounded-sm px-2 py-3 transition ${p.featured ? 'bg-accent text-ink hover:bg-accent-dark hover:text-white' : 'hover:bg-ink/5 hover:text-accent-dark'}`}
               >
                 <span className="flex items-center gap-2">
                   {p.featured && <SparkIcon />}
                   {p.name}
                 </span>
-                <span className={`font-medium ${p.featured ? '' : 'text-accent'}`}>{p.price}</span>
+                <span className={`font-medium ${p.featured ? '' : 'text-accent-dark'}`}>{p.price}</span>
               </Link>
             </li>
           ))}

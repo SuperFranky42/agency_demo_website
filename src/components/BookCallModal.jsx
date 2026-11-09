@@ -125,14 +125,14 @@ function BookCallFlow({ onClose }) {
 
         {booking && (
           <div className="py-4 text-center">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent text-ink">
               <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
             </div>
             <h2 className="mt-5 font-serif text-3xl">Request received.</h2>
             <p className="mt-3 text-muted">
               Thanks {booking.name.split(' ')[0]}. We will email {booking.email} to arrange a time that works for you.
             </p>
-            <p className="mt-4 inline-block rounded-md bg-white/10 px-3 py-1.5 font-mono text-sm">Ref: {booking.reference}</p>
+            <p className="mt-4 inline-block rounded-md bg-ink/10 px-3 py-1.5 font-mono text-sm">Ref: {booking.reference}</p>
             <button onClick={onClose} className="btn btn-accent mt-6 w-full">
               Done
             </button>

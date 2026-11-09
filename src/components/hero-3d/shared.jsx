@@ -2,14 +2,17 @@ import { useEffect, useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
-export const ACCENT = '#f04e0f'
+export const ACCENT = '#fd7b41'
+export const ACCENT_DARK = '#9a4012'
+export const CHARCOAL = '#3c4044'
+export const PEACH = '#edbf9b'
 
 export function LabelText({ title, sub, align = 'center', accent = false }) {
   const shift = align === 'left' ? '' : align === 'right' ? '-translate-x-full' : '-translate-x-1/2'
   return (
-    <div className={`${shift} -translate-y-1/2 whitespace-nowrap rounded-lg bg-ink/80 px-3 py-1.5 text-center shadow-[0_8px_20px_rgba(0,0,0,0.55)] ring-1 ring-white/15 backdrop-blur-sm`}>
-      <p className={`text-sm font-bold leading-none tracking-tight sm:text-base ${accent ? 'text-accent' : 'text-white'}`}>{title}</p>
-      {sub && <p className="mt-1 text-xs font-medium leading-none text-white/90">{sub}</p>}
+    <div className={`${shift} -translate-y-1/2 whitespace-nowrap rounded-lg bg-canvas/85 px-3 py-1.5 text-center shadow-[0_8px_20px_rgba(60,64,68,0.18)] ring-1 ring-ink/15 backdrop-blur-sm`}>
+      <p className={`text-sm font-bold leading-none tracking-tight sm:text-base ${accent ? 'text-accent-dark' : 'text-ink'}`}>{title}</p>
+      {sub && <p className="mt-1 text-xs font-medium leading-none text-muted">{sub}</p>}
     </div>
   )
 }
@@ -237,8 +240,8 @@ export function PulseRing({ position, color = ACCENT, size = 0.25, delay = 0, ro
 export function SceneLights() {
   return (
     <>
-      <ambientLight intensity={0.32} />
-      <hemisphereLight skyColor="#fff6f1" groundColor="#1a0904" intensity={0.55} />
+      <ambientLight intensity={0.5} />
+      <hemisphereLight skyColor="#fff6f1" groundColor="#b7a596" intensity={0.65} />
       <directionalLight position={[5, 8, 4]} intensity={1.7} color="#fff8f4" />
       <directionalLight position={[-6, 2, -3]} intensity={0.45} color="#ffb089" />
       <pointLight position={[2.2, 1.6, 1.4]} intensity={18} color={ACCENT} distance={10} decay={2} />

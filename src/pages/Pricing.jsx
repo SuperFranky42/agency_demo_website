@@ -15,11 +15,11 @@ function DetailsAccordion() {
           <div key={d.title}>
             <button
               onClick={() => setOpenIndex(open ? -1 : i)}
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-medium hover:text-accent"
+              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-medium hover:text-accent-dark"
               aria-expanded={open}
             >
               {d.title}
-              <span className={`text-xl text-accent transition-transform ${open ? 'rotate-45' : ''}`} aria-hidden="true">
+              <span className={`text-xl text-accent-dark transition-transform ${open ? 'rotate-45' : ''}`} aria-hidden="true">
                 +
               </span>
             </button>
@@ -50,7 +50,7 @@ export default function Pricing() {
         Starting prices in USD. Final scope and pricing are confirmed in a written proposal before any work begins.
       </PageHeader>
 
-      <div className="sticky top-20 z-30 border-b border-line bg-ink/95 backdrop-blur">
+      <div className="sticky top-20 z-30 border-b border-line bg-canvas/95 backdrop-blur">
         <div className="container-x no-scrollbar flex gap-2 overflow-x-auto py-3" role="tablist">
           {pricingTabs.map((t) => (
             <button
@@ -59,7 +59,7 @@ export default function Pricing() {
               aria-selected={t.id === activeId}
               onClick={() => selectTab(t.id)}
               className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition ${
-                t.id === activeId ? 'bg-white text-ink' : 'text-white/80 hover:bg-white/10'
+                t.id === activeId ? 'bg-ink text-canvas' : 'text-ink/80 hover:bg-ink/10'
               }`}
             >
               {t.label}
@@ -81,7 +81,7 @@ export default function Pricing() {
               {group.title && (
                 <div className="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-b border-line pb-3">
                   <h3 className="font-serif text-2xl">{group.title}</h3>
-                  {group.range && <span className="font-semibold text-accent">{group.range}</span>}
+                  {group.range && <span className="font-semibold text-accent-dark">{group.range}</span>}
                 </div>
               )}
               <div className={`grid gap-6 sm:grid-cols-2 ${group.packages.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
@@ -97,7 +97,7 @@ export default function Pricing() {
               <h3 className="font-serif text-2xl">Optional ongoing support</h3>
               <div className="mt-5 overflow-x-auto rounded-md border border-line">
                 <table className="w-full text-left text-sm">
-                  <thead className="bg-white/5">
+                  <thead className="bg-ink/5">
                     <tr>
                       <th className="px-5 py-3 font-semibold">Service</th>
                       <th className="px-5 py-3 font-semibold">Monthly range</th>
@@ -108,7 +108,7 @@ export default function Pricing() {
                     {tab.support.map((s) => (
                       <tr key={s.service}>
                         <td className="px-5 py-3 font-medium">{s.service}</td>
-                        <td className="whitespace-nowrap px-5 py-3 text-accent">{s.price}</td>
+                        <td className="whitespace-nowrap px-5 py-3 text-accent-dark">{s.price}</td>
                         <td className="px-5 py-3 text-muted">{s.scope}</td>
                       </tr>
                     ))}
@@ -125,7 +125,7 @@ export default function Pricing() {
                 {tab.addons.map((a) => (
                   <li key={a.name} className="flex items-center justify-between rounded-md border border-line px-4 py-3 text-sm">
                     {a.name}
-                    <span className="font-semibold text-accent">{a.price}</span>
+                    <span className="font-semibold text-accent-dark">{a.price}</span>
                   </li>
                 ))}
               </ul>
@@ -134,7 +134,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-white/[0.03] py-14 sm:py-16">
+      <section className="border-t border-line bg-peach/25 py-14 sm:py-16">
         <div className="container-x grid gap-10 md:grid-cols-[1fr_1.5fr]">
           <div>
             <p className="eyebrow">Important details</p>

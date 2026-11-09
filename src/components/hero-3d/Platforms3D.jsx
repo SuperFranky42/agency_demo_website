@@ -2,7 +2,7 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { RoundedBox } from '@react-three/drei'
 import * as THREE from 'three'
-import { ACCENT, LabelLayer, LabelProjector, LabelText, ParallaxGroup, PulseRing, SceneLights } from './shared.jsx'
+import { ACCENT, ACCENT_DARK, CHARCOAL, PEACH, LabelLayer, LabelProjector, LabelText, ParallaxGroup, PulseRing, SceneLights } from './shared.jsx'
 
 const PLATFORMS = [
   { pos: [-1.35, -0.42, 0.22], title: 'Found', sub: 'Content and ads' },
@@ -10,7 +10,7 @@ const PLATFORMS = [
   { pos: [1.35, 0.66, -0.22], title: 'Booked', sub: 'AI follow-up', accent: true },
 ]
 const HOPS = 8
-const white = new THREE.Color('#ffffff')
+const deep = new THREE.Color(ACCENT_DARK)
 const orange = new THREE.Color(ACCENT)
 
 function glowMap() {
@@ -19,10 +19,10 @@ function glowMap() {
   canvas.height = 256
   const ctx = canvas.getContext('2d')
   const grd = ctx.createRadialGradient(128, 128, 8, 128, 128, 128)
-  grd.addColorStop(0, 'rgba(255,255,255,0.95)')
-  grd.addColorStop(0.18, 'rgba(255,170,120,0.55)')
-  grd.addColorStop(0.45, 'rgba(240,78,15,0.18)')
-  grd.addColorStop(1, 'rgba(240,78,15,0)')
+  grd.addColorStop(0, 'rgba(253,123,65,0.75)')
+  grd.addColorStop(0.18, 'rgba(237,191,155,0.6)')
+  grd.addColorStop(0.45, 'rgba(237,191,155,0.22)')
+  grd.addColorStop(1, 'rgba(237,191,155,0)')
   ctx.fillStyle = grd
   ctx.fillRect(0, 0, 256, 256)
   const tex = new THREE.CanvasTexture(canvas)
@@ -59,7 +59,7 @@ function Hoppers() {
       dummy.scale.setScalar(scale)
       dummy.updateMatrix()
       core.current.setMatrixAt(i, dummy.matrix)
-      core.current.setColorAt(i, color.copy(white).lerp(orange, t))
+      core.current.setColorAt(i, color.copy(deep).lerp(orange, t))
       dummy.scale.setScalar(scale * 2.1)
       dummy.updateMatrix()
       halo.current.setMatrixAt(i, dummy.matrix)
@@ -73,7 +73,7 @@ function Hoppers() {
     <>
       <instancedMesh ref={halo} args={[null, null, HOPS]} raycast={noRaycast}>
         <sphereGeometry args={[1, 12, 12]} />
-        <meshBasicMaterial color={ACCENT} transparent opacity={0.28} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
+        <meshBasicMaterial color={ACCENT} transparent opacity={0.22} depthWrite={false} toneMapped={false} />
       </instancedMesh>
       <instancedMesh ref={core} args={[null, null, HOPS]} raycast={noRaycast}>
         <sphereGeometry args={[1, 16, 16]} />
@@ -97,11 +97,11 @@ function Trails() {
     <group key={i}>
       <mesh raycast={noRaycast}>
         <tubeGeometry args={[c, 64, 0.028, 8, false]} />
-        <meshBasicMaterial color={ACCENT} transparent opacity={0.28} depthWrite={false} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color={ACCENT} transparent opacity={0.3} depthWrite={false} />
       </mesh>
       <mesh raycast={noRaycast}>
         <tubeGeometry args={[c, 64, 0.008, 8, false]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.7} toneMapped={false} />
+        <meshBasicMaterial color={ACCENT_DARK} transparent opacity={0.8} toneMapped={false} />
       </mesh>
     </group>
   ))
@@ -138,7 +138,7 @@ function Motes() {
   return (
     <instancedMesh ref={ref} args={[null, null, count]} raycast={noRaycast}>
       <sphereGeometry args={[1, 8, 8]} />
-      <meshBasicMaterial color={ACCENT} transparent opacity={0.55} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
+      <meshBasicMaterial color={ACCENT} transparent opacity={0.6} depthWrite={false} toneMapped={false} />
     </instancedMesh>
   )
 }
@@ -161,7 +161,7 @@ function Icon({ index, position }) {
       {index === 0 && (
         <mesh>
           <octahedronGeometry args={[0.2, 0]} />
-          <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.25} metalness={0.45} roughness={0.18} flatShading />
+          <meshStandardMaterial color={CHARCOAL} emissive={CHARCOAL} emissiveIntensity={0.2} metalness={0.45} roughness={0.25} flatShading />
         </mesh>
       )}
       {index === 1 && (
@@ -205,7 +205,7 @@ function Platform({ p, index }) {
     <group position={p.pos}>
       <mesh position={[0, -0.22, 0]} rotation={[-Math.PI / 2, 0, 0]} raycast={noRaycast}>
         <planeGeometry args={[accent ? 2.4 : 1.9, accent ? 2.4 : 1.9]} />
-        <meshBasicMaterial map={GLOW} transparent opacity={accent ? 0.7 : 0.38} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
+        <meshBasicMaterial map={GLOW} transparent opacity={accent ? 0.75 : 0.45} depthWrite={false} toneMapped={false} />
       </mesh>
       <group
         ref={rig}
@@ -223,14 +223,14 @@ function Platform({ p, index }) {
         }}
       >
         <RoundedBox args={[1.28, 0.28, 1.28]} radius={0.08} smoothness={4}>
-          <meshStandardMaterial color={accent ? '#2a120b' : '#141414'} metalness={0.72} roughness={0.22} />
+          <meshStandardMaterial color={accent ? PEACH : CHARCOAL} metalness={0.35} roughness={0.35} />
         </RoundedBox>
         <mesh position={[0, 0.145, 0]} rotation={[-Math.PI / 2, 0, 0]}>
           <planeGeometry args={[1.12, 1.12]} />
           <meshStandardMaterial
-            color={accent ? ACCENT : '#242424'}
+            color={accent ? ACCENT : '#4a4f54'}
             emissive={accent ? ACCENT : '#000000'}
-            emissiveIntensity={accent ? 0.55 : 0}
+            emissiveIntensity={accent ? 0.35 : 0}
             metalness={0.35}
             roughness={0.4}
           />
@@ -317,7 +317,7 @@ export default function Platforms3D() {
         </ParallaxGroup>
       </Canvas>
       <LabelLayer items={LABELS} els={els} />
-      <p className={`hero-touch-hint pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs font-medium text-white/60${grabbed ? ' is-hidden' : ''}`}>
+      <p className={`hero-touch-hint pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs font-medium text-ink/60${grabbed ? ' is-hidden' : ''}`}>
         Swipe sideways to rotate · hold, then drag to tilt
       </p>
     </div>

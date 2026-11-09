@@ -26,9 +26,9 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative overflow-hidden text-white">
+      <section className="relative overflow-hidden text-ink">
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_34%_at_50%_62%,rgba(240,78,15,0.18),rgba(240,78,15,0.05)_40%,transparent_68%)] [mask-image:linear-gradient(to_bottom,#000_58%,transparent_90%)] md:bg-[radial-gradient(ellipse_52%_62%_at_68%_46%,rgba(240,78,15,0.16),rgba(240,78,15,0.04)_40%,transparent_70%)] md:[mask-image:linear-gradient(to_bottom,#000_68%,transparent_96%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_34%_at_50%_62%,rgba(253,123,65,0.18),rgba(237,191,155,0.12)_40%,transparent_68%)] [mask-image:linear-gradient(to_bottom,#000_58%,transparent_90%)] md:bg-[radial-gradient(ellipse_52%_62%_at_68%_46%,rgba(253,123,65,0.16),rgba(237,191,155,0.1)_40%,transparent_70%)] md:[mask-image:linear-gradient(to_bottom,#000_68%,transparent_96%)]"
           aria-hidden="true"
         />
         <div className="container-x relative grid items-center gap-8 py-14 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] md:gap-6 md:py-20 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-10">
@@ -39,7 +39,7 @@ export default function Home() {
               Get leads.
             </h1>
             <p className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">Follow up automatically.</p>
-            <p className="mt-5 max-w-md text-white/70">
+            <p className="mt-5 max-w-md text-muted">
               Creative production, digital marketing, websites and AI automation from one partner, connected into a single
               growth system.
             </p>
@@ -72,7 +72,7 @@ export default function Home() {
             </div>
             <Link
               to="/services"
-              className="shrink-0 text-sm font-semibold underline decoration-accent decoration-2 underline-offset-4 transition hover:text-accent"
+              className="shrink-0 text-sm font-semibold underline decoration-accent decoration-2 underline-offset-4 transition hover:text-accent-dark"
             >
               Full service list &rarr;
             </Link>
@@ -88,7 +88,7 @@ export default function Home() {
           <PricingPreview />
           <p className="mt-4 text-center text-sm text-muted">
             Starting prices in USD.{' '}
-            <Link to="/pricing" className="font-medium text-white underline decoration-accent underline-offset-4 hover:text-accent">
+            <Link to="/pricing" className="font-medium text-ink underline decoration-accent underline-offset-4 hover:text-accent-dark">
               See every package
             </Link>
           </p>
@@ -102,7 +102,7 @@ export default function Home() {
               <h2 className="section-title !text-3xl">Recent work</h2>
               <span className="mt-2 block h-0.5 w-12 bg-accent" />
             </div>
-            <Link to="/work" className="text-sm font-medium hover:text-accent">
+            <Link to="/work" className="text-sm font-medium hover:text-accent-dark">
               View all &rarr;
             </Link>
           </Reveal>

@@ -28,7 +28,7 @@ export default function Work() {
                 <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-line pt-6">
                   {item.results.map((r) => (
                     <div key={r.label}>
-                      <dt className="text-2xl font-bold text-accent">{r.value}</dt>
+                      <dt className="text-2xl font-bold text-accent-dark">{r.value}</dt>
                       <dd className="mt-1 text-xs text-muted">{r.label}</dd>
                     </div>
                   ))}
