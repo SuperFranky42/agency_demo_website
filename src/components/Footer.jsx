@@ -6,7 +6,7 @@ const explore = [
   { to: '/work', label: 'Work' },
   { to: '/services', label: 'Services' },
   { to: '/pricing', label: 'Pricing' },
-  { to: '/#studio', label: 'The studio' },
+  { to: '/studio', label: 'The studio' },
 ]
 
 export default function Footer() {

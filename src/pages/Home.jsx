@@ -258,6 +258,9 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+            <Link to="/studio" className="mt-8 inline-flex items-center gap-2 text-base font-medium hover:text-accent">
+              Meet the studio <Arrow />
+            </Link>
           </Reveal>
         </div>
       </section>
