@@ -13,59 +13,44 @@ const operating = [
   { id: 'complete', name: 'Complete', price: '$1,799' },
 ]
 
-function SparkIcon() {
+function PriceList({ title, unit, tab, items }) {
   return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" />
-    </svg>
+    <div>
+      <div className="flex items-baseline justify-between border-b border-ink pb-4">
+        <h3 className="font-display text-2xl font-bold tracking-[-0.02em]">{title}</h3>
+        <span className="text-[11px] font-medium uppercase tracking-[0.1em] text-muted">{unit}</span>
+      </div>
+      <ul className="divide-y divide-line">
+        {items.map((p) => (
+          <li key={p.id}>
+            <Link
+              to={`/pricing?tab=${tab}#${p.id}`}
+              className={`group flex items-center justify-between gap-4 py-4 transition ${p.featured ? '-mx-3 rounded-md bg-lime px-3' : 'hover:pl-1'}`}
+            >
+              <span className="flex items-center gap-3 font-medium group-hover:text-accent">
+                {p.name}
+                {p.featured && <span className="rounded-full bg-ink px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] text-lime">Popular</span>}
+              </span>
+              <span className="flex items-center gap-3 font-display text-lg font-bold">
+                {p.price}
+                <span aria-hidden="true" className="font-sans text-xl font-normal transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5">&#8599;</span>
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
 export default function PricingPreview() {
   return (
-    <div className="grid gap-5 md:grid-cols-2">
-      <Reveal className="panel rounded-md border border-line bg-surface p-6">
-        <div className="flex items-baseline justify-between">
-          <h3 className="font-serif text-2xl">New business</h3>
-          <span className="text-xs text-muted">one-time</span>
-        </div>
-        <ul className="mt-4 divide-y divide-line">
-          {newBusiness.map((p) => (
-            <li key={p.id}>
-              <Link
-                to={`/pricing?tab=launch#${p.id}`}
-                className="group flex items-center justify-between py-3 transition hover:pl-1"
-              >
-                <span className="group-hover:text-accent-dark">{p.name}</span>
-                <span className="font-medium text-accent-dark">{p.price}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+    <div className="grid gap-10 md:grid-cols-2 md:gap-8">
+      <Reveal>
+        <PriceList title="New business" unit="One-time" tab="launch" items={newBusiness} />
       </Reveal>
-
-      <Reveal delay={100} className="panel rounded-md border border-line bg-surface p-6">
-        <div className="flex items-baseline justify-between">
-          <h3 className="font-serif text-2xl">Already operating</h3>
-          <span className="text-xs text-muted">per month</span>
-        </div>
-        <ul className="mt-4 space-y-1">
-          {operating.map((p) => (
-            <li key={p.id}>
-              <Link
-                to={`/pricing?tab=monthly#${p.id}`}
-                className={`flex items-center justify-between rounded-sm px-2 py-3 transition ${p.featured ? 'bg-accent text-ink hover:bg-accent-dark hover:text-white' : 'hover:bg-ink/5 hover:text-accent-dark'}`}
-              >
-                <span className="flex items-center gap-2">
-                  {p.featured && <SparkIcon />}
-                  {p.name}
-                </span>
-                <span className={`font-medium ${p.featured ? '' : 'text-accent-dark'}`}>{p.price}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <Reveal delay={100}>
+        <PriceList title="Already operating" unit="Per month" tab="monthly" items={operating} />
       </Reveal>
     </div>
   )

@@ -1,21 +1,14 @@
 import { Link } from 'react-router-dom'
 
-export default function Logo({ variant = 'wordmark' }) {
-  if (variant === 'lockup') {
-    return (
-      <Link to="/" aria-label="LeadCraft home" className="inline-block max-w-[15.5rem]">
-        <img
-          src="/logo-lockup.png"
-          alt="LeadCraft. We craft demand. You close deals. Growth and marketing agency."
-          className="h-auto w-full"
-        />
-      </Link>
-    )
-  }
+const sizes = {
+  nav: 'text-[28px] tracking-[-0.04em] sm:text-[35px]',
+  footer: 'text-7xl leading-none tracking-[-0.05em] sm:text-[108px]',
+}
 
+export default function Logo({ size = 'nav', className = '' }) {
   return (
-    <Link to="/" aria-label="LeadCraft home" className="inline-flex shrink-0">
-      <img src="/logo-wordmark-dark.png" alt="" className="h-16 w-auto" />
+    <Link to="/" aria-label="Offbeat home" className={`inline-flex shrink-0 font-display font-bold ${sizes[size]} ${className}`}>
+      offbeat®
     </Link>
   )
 }

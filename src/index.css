@@ -1,17 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-canvas: #dddcdb;
-  --color-surface: #e9e8e7;
-  --color-ink: #3c4044;
-  --color-muted: #565a5f;
-  --color-line: #c4c2c0;
-  --color-accent: #fd7b41;
-  --color-accent-dark: #9a4012;
-  --color-peach: #edbf9b;
+  --color-canvas: #f6f4ed;
+  --color-surface: #e9e7de;
+  --color-ink: #20211e;
+  --color-muted: #64655f;
+  --color-line: #d8d8cf;
+  --color-accent: #f34e2b;
+  --color-accent-dark: #c2361a;
+  --color-lime: #daf26b;
+  --color-lilac: #d8cdf1;
+  --color-plum: #51445d;
+  --color-charcoal: #2b2d28;
+  --color-fog: #c6c8bd;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
 }
 
 html {
@@ -21,7 +26,12 @@ html {
 
 @layer base {
   section[id] {
-    scroll-margin-top: 5.5rem;
+    scroll-margin-top: 5rem;
+  }
+  @media (min-width: 48rem) {
+    section[id] {
+      scroll-margin-top: 6.5rem;
+    }
   }
 }
 
@@ -30,37 +40,46 @@ body {
 }
 
 ::selection {
-  background: var(--color-peach);
+  background: var(--color-lime);
   color: var(--color-ink);
 }
 
 @layer components {
   .container-x {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+    @apply mx-auto w-full max-w-[90rem] px-5 sm:px-8 lg:px-16;
   }
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:opacity-60 cursor-pointer;
+    @apply inline-flex items-center justify-center gap-3 rounded-full px-6 py-3.5 text-sm font-medium transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:opacity-60 cursor-pointer;
   }
   .btn-accent {
-    @apply bg-accent text-ink hover:bg-accent-dark hover:text-white;
+    @apply bg-accent text-white hover:bg-ink;
+  }
+  .btn-dark {
+    @apply bg-ink text-canvas hover:bg-accent hover:text-white;
   }
   .btn-outline-light {
     @apply border border-ink text-ink hover:bg-ink hover:text-canvas;
   }
   .btn-outline-dark {
-    @apply border border-ink/40 text-ink hover:bg-ink hover:text-canvas;
+    @apply border border-ink/30 text-ink hover:border-ink hover:bg-ink hover:text-canvas;
+  }
+  .btn-arrow {
+    @apply text-xl leading-none font-normal;
   }
   .section-title {
-    @apply font-serif text-3xl sm:text-4xl tracking-tight;
+    @apply font-display text-3xl font-bold tracking-[-0.04em] sm:text-4xl;
+  }
+  .display-title {
+    @apply font-display text-5xl font-bold leading-[1.04] tracking-[-0.05em] sm:text-6xl lg:text-[66px];
   }
   .accent-rule {
     @apply mx-auto mt-3 block h-0.5 w-20 bg-accent;
   }
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-accent-dark;
+    @apply text-[11px] font-medium uppercase tracking-[0.1em] text-muted;
   }
   .field {
-    @apply w-full rounded-md border border-line bg-surface px-3.5 py-2.5 text-sm text-ink outline-none transition placeholder:text-ink/40 focus:border-accent focus:ring-1 focus:ring-accent;
+    @apply w-full rounded-[5px] border border-transparent bg-surface px-3 py-3 text-sm text-ink outline-none transition placeholder:text-muted focus:border-ink focus:ring-1 focus:ring-ink;
   }
   .no-scrollbar {
     scrollbar-width: none;
@@ -76,26 +95,6 @@ body {
   }
 }
 
-.site-atmosphere {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 78% 58% at 68% 16%, rgba(253, 123, 65, 0.14), transparent 58%),
-    radial-gradient(ellipse 46% 40% at 12% 86%, rgba(237, 191, 155, 0.25), transparent 60%);
-}
-
-.site-atmosphere::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.04;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  background-size: 180px 180px;
-}
-
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -106,20 +105,13 @@ body {
   transform: none;
 }
 
-@keyframes float-slow {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(8deg); }
-}
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }
 }
 
-.hero-copy,
-.hero-scene {
-  opacity: 0;
-}
 .hero-copy {
+  opacity: 0;
   transform: translateY(16px);
   transition:
     opacity 1.05s cubic-bezier(0.33, 0, 0.2, 1),
@@ -129,56 +121,21 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
-.hero-scene {
-  transition: opacity 1.15s cubic-bezier(0.33, 0, 0.2, 1);
-}
-.hero-scene canvas {
-  cursor: grab;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-.hero-touch-hint {
+
+.faq-item summary::-webkit-details-marker {
   display: none;
-  transition: opacity 0.6s ease;
 }
-.hero-touch-hint.is-hidden {
-  opacity: 0;
-}
-@media (hover: none) and (pointer: coarse) {
-  .hero-touch-hint {
-    display: block;
-  }
-}
-.hero-scene.is-ready {
-  opacity: 1;
-}
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-}
-.animate-float-slow {
-  animation: float-slow 9s ease-in-out infinite;
-  transform-origin: 50% 50%;
-  transform-box: fill-box;
-}
-.animate-pulse-dot {
-  animation: pulse-dot 3s ease-in-out infinite;
-  transform-origin: center;
-  transform-box: fill-box;
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .hero-copy,
-  .hero-copy.is-in,
-  .hero-scene,
-  .hero-scene.is-ready {
+  .hero-copy.is-in {
     opacity: 1;
     transform: none;
     transition: none;
   }
-  .animate-float-slow, .animate-pulse-dot { animation: none; }
 }

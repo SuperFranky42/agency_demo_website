@@ -25,7 +25,7 @@ export default function Modal({ open, onClose, title, children, size = 'max-w-lg
       <div
         ref={panelRef}
         tabIndex={-1}
-        className={`relative max-h-[92vh] w-full ${size} overflow-y-auto rounded-t-2xl bg-surface text-ink outline-none shadow-2xl sm:rounded-2xl`}
+        className={`relative max-h-[92vh] w-full ${size} overflow-y-auto rounded-t-2xl bg-canvas text-ink outline-none shadow-2xl sm:rounded-2xl`}
       >
         <button
           onClick={onClose}

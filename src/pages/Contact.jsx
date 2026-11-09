@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { allPackages, findPackage } from '../data/pricing.js'
 import { useBookCall } from '../components/BookCallModal.jsx'
+import PageHeader from '../components/PageHeader.jsx'
 import { makeReference } from '../lib/storage.js'
 import { submitForm } from '../lib/submitForm.js'
 
@@ -44,7 +45,7 @@ function Chip({ selected, onClick, children }) {
       onClick={onClick}
       aria-pressed={selected}
       className={`rounded-full border px-3.5 py-1.5 text-sm transition ${
-        selected ? 'border-ink bg-ink text-canvas' : 'border-ink/25 hover:border-ink'
+        selected ? 'border-ink bg-ink text-canvas' : 'border-ink/20 bg-surface hover:border-ink'
       }`}
     >
       {children}
@@ -156,10 +157,10 @@ export default function Contact() {
     const pkg = findPackage(submitted.packageId)
     return (
       <section className="container-x max-w-2xl py-20 text-center">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-ink">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-white">
           <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
         </div>
-        <h1 className="mt-6 font-serif text-4xl sm:text-5xl">Thanks, {submitted.name.split(' ')[0]}.</h1>
+        <h1 className="mt-6 font-display text-4xl font-bold tracking-[-0.04em] sm:text-6xl">Thanks, {submitted.name.split(' ')[0]}.</h1>
         <p className="mt-4 text-lg text-muted">
           We have your request for <strong className="text-ink">{submitted.business}</strong>. Expect a reply at{' '}
           {submitted.email} within one business day with one clear recommendation.
@@ -181,21 +182,15 @@ export default function Contact() {
 
   return (
     <>
-      <section className="border-b border-line">
-        <div className="container-x py-14 sm:py-20">
-          <p className="eyebrow">Get a quote</p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">Tell us what you are building.</h1>
-          <p className="mt-5 max-w-2xl text-lg text-muted">
-            A few quick questions so we can recommend one clear solution, not a long menu of options.
-          </p>
-        </div>
-      </section>
+      <PageHeader eyebrow="Get a quote" title="Tell us what you are building.">
+        A few quick questions so we can recommend one clear solution, not a long menu of options.
+      </PageHeader>
 
       <section className="py-14 sm:py-16">
         <div className="container-x grid gap-12 lg:grid-cols-[1.6fr_1fr]">
           <form onSubmit={onSubmit} noValidate className="space-y-10">
             <fieldset className="space-y-5">
-              <legend className="font-serif text-2xl">1. What do you need?</legend>
+              <legend className="font-display text-2xl font-bold tracking-[-0.02em]">1. What do you need?</legend>
               <div id="q-need" tabIndex={-1} className="flex flex-wrap gap-2 outline-none">
                 {NEEDS.map((n) => (
                   <Chip key={n.id} selected={form.need === n.id} onClick={() => setForm((f) => ({ ...f, need: n.id }))}>
@@ -217,7 +212,7 @@ export default function Contact() {
             </fieldset>
 
             <fieldset className="space-y-5">
-              <legend className="font-serif text-2xl">2. About you and your business</legend>
+              <legend className="font-display text-2xl font-bold tracking-[-0.02em]">2. About you and your business</legend>
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field label="Your name" error={errors.name} htmlFor="q-name">
                   <input id="q-name" className={`field ${errors.name ? 'field-error' : ''}`} value={form.name} onChange={set('name')} autoComplete="name" />
@@ -238,7 +233,7 @@ export default function Contact() {
             </fieldset>
 
             <fieldset className="space-y-5">
-              <legend className="font-serif text-2xl">3. Goals and requirements</legend>
+              <legend className="font-display text-2xl font-bold tracking-[-0.02em]">3. Goals and requirements</legend>
               <div>
                 <p className="mb-2 text-sm font-medium">Main outcome you want</p>
                 <div id="q-outcome" tabIndex={-1} className="flex flex-wrap gap-2 outline-none">
@@ -311,11 +306,11 @@ export default function Contact() {
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:h-fit">
             {selectedPackage && (
-              <div className="panel rounded-md border border-line bg-surface p-6">
+              <div className="rounded-lg border border-line bg-surface p-6">
                 <p className="eyebrow">Selected package</p>
-                <h3 className="mt-2 font-serif text-2xl">{selectedPackage.name}</h3>
+                <h3 className="mt-2 font-display text-2xl font-bold tracking-[-0.02em]">{selectedPackage.name}</h3>
                 <p className="mt-1">
-                  <span className="text-2xl font-bold text-accent-dark">{selectedPackage.price}</span>{' '}
+                  <span className="text-2xl font-bold text-accent">{selectedPackage.price}</span>{' '}
                   <span className="text-sm text-muted">{selectedPackage.unit}</span>
                 </p>
                 <ul className="mt-4 space-y-1.5 text-sm text-muted">
@@ -323,24 +318,24 @@ export default function Contact() {
                     <li key={f}>&middot; {f}</li>
                   ))}
                 </ul>
-                <Link to={`/pricing?tab=${selectedPackage.tabId}#${selectedPackage.id}`} className="mt-4 inline-block text-sm text-accent-dark hover:underline">
+                <Link to={`/pricing?tab=${selectedPackage.tabId}#${selectedPackage.id}`} className="mt-4 inline-block text-sm text-accent hover:underline">
                   View full details &rarr;
                 </Link>
               </div>
             )}
-            <div className="panel rounded-md border border-line p-6">
-              <h3 className="font-serif text-2xl">Prefer to talk?</h3>
+            <div className="rounded-lg border border-line p-6">
+              <h3 className="font-display text-2xl font-bold tracking-[-0.02em]">Prefer to talk?</h3>
               <p className="mt-2 text-sm text-muted">Book a free 30-minute strategy call and we will scope it together.</p>
               <button onClick={() => openBookCall()} className="btn btn-outline-dark mt-4 w-full">
                 Book a call
               </button>
             </div>
-            <div className="panel rounded-md border border-line p-6 text-sm">
+            <div className="rounded-lg border border-line p-6 text-sm">
               <h3 className="font-semibold">What happens next</h3>
               <ol className="mt-3 space-y-2 text-muted">
-                <li><span className="font-semibold text-accent-dark">1.</span> We review your answers.</li>
-                <li><span className="font-semibold text-accent-dark">2.</span> You get one clear recommendation and quote.</li>
-                <li><span className="font-semibold text-accent-dark">3.</span> Scope is confirmed in writing before work begins.</li>
+                <li><span className="font-semibold text-accent">1.</span> We review your answers.</li>
+                <li><span className="font-semibold text-accent">2.</span> You get one clear recommendation and quote.</li>
+                <li><span className="font-semibold text-accent">3.</span> Scope is confirmed in writing before work begins.</li>
               </ol>
             </div>
           </aside>

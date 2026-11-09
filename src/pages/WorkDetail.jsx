@@ -16,18 +16,18 @@ export default function WorkDetail() {
 
   return (
     <Fragment key={slug}>
-      <section className="border-b border-line">
-        <div className="container-x py-12 sm:py-16">
-          <Link to="/work" className="text-sm text-muted hover:text-accent-dark">
+      <section className="container-x">
+        <div className="border-b border-line pb-12 pt-10 sm:pb-16">
+          <Link to="/work" className="text-sm font-medium text-muted hover:text-accent">
             &larr; All work
           </Link>
-          <p className="eyebrow mt-6">
+          <p className="eyebrow mt-6 !text-ink">
             {item.category} &middot; {item.year}
             {item.status && <> &middot; {item.status}</>}
           </p>
-          <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-6xl">{item.client}</h1>
-          <p className="mt-4 max-w-2xl text-lg text-muted">{item.summary}</p>
-          <div className="mt-10 aspect-[16/7] overflow-hidden rounded-md border border-line">
+          <h1 className="mt-4 font-display text-5xl font-bold leading-[1.03] tracking-[-0.055em] sm:text-7xl lg:text-[84px]">{item.client}</h1>
+          <p className="mt-5 max-w-2xl text-[17px] leading-7 text-muted">{item.summary}</p>
+          <div className="mt-10 aspect-[16/7] overflow-hidden rounded-lg bg-ink">
             {item.image ? (
               <img src={item.image} alt={item.client} className="h-full w-full object-cover object-top" />
             ) : (
@@ -41,37 +41,37 @@ export default function WorkDetail() {
         <div className="container-x grid gap-12 md:grid-cols-[2fr_1fr]">
           <div className="space-y-10">
             <Reveal>
-              <h2 className="font-serif text-3xl">The challenge</h2>
+              <h2 className="section-title">The challenge</h2>
               <p className="mt-4 leading-relaxed text-muted">{item.challenge}</p>
             </Reveal>
             <Reveal>
-              <h2 className="font-serif text-3xl">What we did</h2>
+              <h2 className="section-title">What we did</h2>
               <p className="mt-4 leading-relaxed text-muted">{item.solution}</p>
             </Reveal>
             <Reveal>
-              <h2 className="font-serif text-3xl">{item.status ? 'Progress so far' : 'Results'}</h2>
+              <h2 className="section-title">{item.status ? 'Progress so far' : 'Results'}</h2>
               <dl className="mt-6 grid gap-4 sm:grid-cols-3">
                 {item.results.map((r) => (
-                  <div key={r.label} className="rounded-md border border-line bg-surface p-5">
-                    <dt className="text-3xl font-bold text-accent-dark">{r.value}</dt>
+                  <div key={r.label} className="rounded-lg bg-surface p-5">
+                    <dt className="font-display text-3xl font-bold tracking-[-0.03em] text-accent">{r.value}</dt>
                     <dd className="mt-2 text-sm text-muted">{r.label}</dd>
                   </div>
                 ))}
               </dl>
             </Reveal>
           </div>
-          <aside className="h-fit rounded-md border border-line p-6 md:sticky md:top-24">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted">Services used</h3>
+          <aside className="h-fit rounded-lg bg-ink p-6 text-canvas md:sticky md:top-32">
+            <h3 className="text-[11px] font-medium uppercase tracking-[0.1em] text-fog">Services used</h3>
             <ul className="mt-4 space-y-2">
               {item.services.map((s) => (
                 <li key={s} className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-accent" />
+                  <span className="h-2 w-2 rounded-full bg-lime" />
                   {s}
                 </li>
               ))}
             </ul>
-            <Link to="/contact" className="btn btn-accent mt-6 w-full">
-              Get similar results
+            <Link to="/contact" className="btn btn-accent mt-6 w-full justify-between">
+              Get similar results <span className="btn-arrow" aria-hidden="true">&#8599;</span>
             </Link>
           </aside>
         </div>
@@ -139,7 +139,7 @@ export default function WorkDetail() {
           <Reveal>
             <h2 className="section-title !text-3xl">More work</h2>
           </Reveal>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
+          <div className="mt-8 grid gap-x-8 gap-y-12 sm:grid-cols-2">
             {others.map((w, i) => (
               <Reveal key={w.slug} delay={i * 90}>
                 <WorkCard item={w} />

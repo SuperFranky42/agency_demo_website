@@ -16,19 +16,19 @@ export default function Work() {
           {work.map((item, i) => (
             <Reveal key={item.slug} className="grid items-center gap-8 md:grid-cols-2">
               <div className={i % 2 === 1 ? 'md:order-2' : ''}>
-                <WorkCard item={item} />
+                <WorkCard item={item} caption={false} />
               </div>
               <div>
                 <p className="eyebrow">
                   {item.category} &middot; {item.year}
                   {item.status && <> &middot; {item.status}</>}
                 </p>
-                <h2 className="mt-2 font-serif text-3xl sm:text-4xl">{item.client}</h2>
-                <p className="mt-4 text-muted">{item.summary}</p>
+                <h2 className="mt-3 font-display text-4xl font-bold tracking-[-0.04em] sm:text-5xl">{item.client}</h2>
+                <p className="mt-4 text-[17px] leading-7 text-muted">{item.summary}</p>
                 <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-line pt-6">
                   {item.results.map((r) => (
                     <div key={r.label}>
-                      <dt className="text-2xl font-bold text-accent-dark">{r.value}</dt>
+                      <dt className="font-display text-2xl font-bold tracking-[-0.03em] text-accent">{r.value}</dt>
                       <dd className="mt-1 text-xs text-muted">{r.label}</dd>
                     </div>
                   ))}

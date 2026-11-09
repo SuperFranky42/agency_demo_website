@@ -4,6 +4,8 @@ export const services = [
     number: '01',
     title: 'Creative production',
     short: 'Brand assets, copy, and design that communicate clearly.',
+    blurb: 'Scroll-stopping stories, made with purpose. From a sharp first frame to the final cut, make every impression count.',
+    tags: ['Video editing', 'Ad creative', 'Brand content'],
     intro:
       'From brand identity to short-form video and AI-assisted commercials, we produce the creative that makes your business recognisable and worth following.',
     deliverables: [
@@ -22,6 +24,8 @@ export const services = [
     number: '02',
     title: 'Digital marketing',
     short: 'Targeted campaigns that attract and convert.',
+    blurb: 'Get the right message in front of the right people. Turn attention into action with a connected strategy.',
+    tags: ['Paid media', 'Social strategy', 'Campaigns'],
     intro:
       'Consistent content, managed social channels and paid campaigns connected to a lead pipeline, so marketing turns into conversations, not just impressions.',
     deliverables: [
@@ -40,6 +44,8 @@ export const services = [
     number: '03',
     title: 'Websites and funnels',
     short: 'High-converting sites built to book meetings and drive sales.',
+    blurb: 'A great-looking website is just the beginning. Build a clear path from curious visitor to confident customer.',
+    tags: ['Web design', 'Landing pages', 'Sales funnels'],
     intro:
       'Business sites, immersive 3D experiences, online stores and AI-powered funnels, each scoped around one clear business goal.',
     deliverables: [
@@ -58,6 +64,8 @@ export const services = [
     number: '04',
     title: 'AI automation',
     short: 'Automate follow-up, lead handoff, and client onboarding.',
+    blurb: 'Put repetitive work on autopilot. Connect your tools and create more space for the work that needs you.',
+    tags: ['AI workflows', 'Lead handling', 'Integrations'],
     intro:
       'A connected CRM, AI receptionist and automated follow-ups that answer enquiries, qualify leads and book appointments while you focus on the work.',
     deliverables: [

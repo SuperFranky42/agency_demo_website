@@ -1,42 +1,37 @@
 import { Link } from 'react-router-dom'
 import WorkVisual from './WorkVisual.jsx'
 
-export default function WorkCard({ item }) {
+export default function WorkCard({ item, caption = true }) {
   return (
-    <Link
-      to={`/work/${item.slug}`}
-      className="group relative block aspect-[4/3] overflow-hidden rounded-sm bg-ink"
-    >
-      <div className="absolute inset-0 transition duration-500 group-hover:scale-105">
-        {item.image ? (
-          <img
-            src={item.image}
-            alt={item.client}
-            loading="lazy"
-            className="h-full w-full object-cover object-top"
-          />
-        ) : (
-          <WorkVisual type={item.visual} />
-        )}
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#2e3134]/95 via-[#2e3134]/30 to-transparent" />
-      {item.status && (
-        <span className="absolute left-4 top-4 rounded-full bg-ink/80 px-3 py-1 text-xs font-medium text-accent backdrop-blur-sm sm:left-5 sm:top-5">
-          {item.status}
+    <Link to={`/work/${item.slug}`} className="group block focus-visible:outline-none">
+      <div className="relative aspect-[640/428] overflow-hidden rounded-lg bg-ink ring-accent ring-offset-2 ring-offset-canvas group-focus-visible:ring-2">
+        <div className="absolute inset-0 transition duration-500 group-hover:scale-[1.03]">
+          {item.image ? (
+            <img src={item.image} alt={item.client} loading="lazy" className="h-full w-full object-cover object-top" />
+          ) : (
+            <WorkVisual type={item.visual} />
+          )}
+        </div>
+        <span className="absolute left-4 top-4 rounded-full bg-canvas px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.08em] text-ink sm:left-5 sm:top-5">
+          {item.status ? `${item.status} · ${item.year}` : item.year}
         </span>
-      )}
-      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-        <p className="flex items-center gap-2 text-sm font-medium text-accent">
-          <span className="h-2 w-2 rounded-full bg-accent" />
-          {item.category}
-        </p>
-        <p className="mt-1 flex items-center justify-between text-lg font-semibold text-white">
-          {item.client}
-          <span className="translate-x-[-6px] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" aria-hidden="true">
-            &rarr;
-          </span>
-        </p>
       </div>
+      {caption && (
+        <div className="mt-6 flex items-start justify-between gap-4">
+          <div>
+            <h3 className="font-display text-2xl font-bold leading-[30px] tracking-[-0.02em] transition group-hover:text-accent">
+              {item.client}
+            </h3>
+            <p className="mt-2 text-[13px] leading-[19.5px] text-muted">{item.category}</p>
+          </div>
+          <span
+            aria-hidden="true"
+            className="text-[30px] leading-none transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent"
+          >
+            &#8599;
+          </span>
+        </div>
+      )}
     </Link>
   )
 }

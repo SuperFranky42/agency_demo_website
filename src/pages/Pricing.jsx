@@ -8,14 +8,14 @@ import { importantDetails, pricingTabs } from '../data/pricing.js'
 function DetailsAccordion() {
   const [openIndex, setOpenIndex] = useState(0)
   return (
-    <div className="divide-y divide-line rounded-md border border-line">
+    <div className="divide-y divide-[#ab9cc0] rounded-lg bg-canvas">
       {importantDetails.map((d, i) => {
         const open = openIndex === i
         return (
           <div key={d.title}>
             <button
               onClick={() => setOpenIndex(open ? -1 : i)}
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-medium hover:text-accent-dark"
+              className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left font-medium hover:text-accent"
               aria-expanded={open}
             >
               {d.title}
@@ -50,7 +50,7 @@ export default function Pricing() {
         Starting prices in USD. Final scope and pricing are confirmed in a written proposal before any work begins.
       </PageHeader>
 
-      <div className="sticky top-20 z-30 border-b border-line bg-canvas/95 backdrop-blur">
+      <div className="sticky top-20 z-30 border-b border-line bg-canvas/95 backdrop-blur md:top-[104px]">
         <div className="container-x no-scrollbar flex gap-2 overflow-x-auto py-3" role="tablist">
           {pricingTabs.map((t) => (
             <button
@@ -80,8 +80,8 @@ export default function Pricing() {
             <div key={gi} className="mt-12">
               {group.title && (
                 <div className="mb-6 flex flex-wrap items-baseline justify-between gap-2 border-b border-line pb-3">
-                  <h3 className="font-serif text-2xl">{group.title}</h3>
-                  {group.range && <span className="font-semibold text-accent-dark">{group.range}</span>}
+                  <h3 className="font-display text-2xl font-bold tracking-[-0.02em]">{group.title}</h3>
+                  {group.range && <span className="font-display font-bold text-accent">{group.range}</span>}
                 </div>
               )}
               <div className={`grid gap-6 sm:grid-cols-2 ${group.packages.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
@@ -94,8 +94,8 @@ export default function Pricing() {
 
           {tab.support && (
             <div className="mt-14">
-              <h3 className="font-serif text-2xl">Optional ongoing support</h3>
-              <div className="mt-5 overflow-x-auto rounded-md border border-line">
+              <h3 className="font-display text-2xl font-bold tracking-[-0.02em]">Optional ongoing support</h3>
+              <div className="mt-5 overflow-x-auto rounded-lg border border-line">
                 <table className="w-full text-left text-sm">
                   <thead className="bg-ink/5">
                     <tr>
@@ -120,10 +120,10 @@ export default function Pricing() {
 
           {tab.addons && (
             <div className="mt-14">
-              <h3 className="font-serif text-2xl">Optional extras</h3>
+              <h3 className="font-display text-2xl font-bold tracking-[-0.02em]">Optional extras</h3>
               <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {tab.addons.map((a) => (
-                  <li key={a.name} className="flex items-center justify-between rounded-md border border-line px-4 py-3 text-sm">
+                  <li key={a.name} className="flex items-center justify-between rounded-lg bg-surface px-4 py-3 text-sm">
                     {a.name}
                     <span className="font-semibold text-accent-dark">{a.price}</span>
                   </li>
@@ -134,7 +134,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="border-t border-line bg-peach/25 py-14 sm:py-16">
+      <section className="bg-lilac py-14 sm:py-16">
         <div className="container-x grid gap-10 md:grid-cols-[1fr_1.5fr]">
           <div>
             <p className="eyebrow">Important details</p>
