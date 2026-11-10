@@ -313,7 +313,7 @@ export default function Contact() {
             </div>
           </form>
 
-          <aside className="space-y-6 lg:sticky lg:top-24 lg:h-fit">
+          <aside className="space-y-6 lg:sticky lg:top-32 lg:h-fit">
             {selectedPackage && (
               <div className="rounded-lg border border-line bg-surface p-6">
                 <p className="eyebrow">Selected package</p>
