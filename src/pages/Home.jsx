@@ -169,7 +169,7 @@ export default function Home() {
             A glimpse of what we&rsquo;ve built. Real projects that bring our creative approach to life.
           </SectionHead>
           <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:mt-[39px]">
-            {work.map((item, i) => (
+            {work.slice(0, 2).map((item, i) => (
               <Reveal key={item.slug} delay={(i % 2) * 90}>
                 <WorkCard item={item} />
               </Reveal>
@@ -261,41 +261,47 @@ export default function Home() {
       </section>
 
       <section id="faq" className="container-x">
-        <div className="grid gap-12 pb-16 pt-14 sm:pb-[55px] sm:pt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,752px)] lg:gap-6">
-          <Reveal className="flex flex-col">
+        <div className="pb-16 pt-14 sm:pb-[55px] sm:pt-16">
+          <Reveal>
             <p className="eyebrow">06 / Good questions</p>
-            <h2 className="mt-8 max-w-[540px] font-display text-5xl font-bold leading-[1.05] tracking-[-0.05em] sm:text-[60px] lg:-ml-1">
-              A few things
-              <br />
-              you might be
-              <br />
-              wondering.
-            </h2>
-            <p className="mt-10 text-[15px] leading-[22.5px] text-muted lg:mt-[68px]">Something else on your mind?</p>
-            <Link to="/contact" className="mt-3 inline-flex w-fit items-center gap-2 text-base font-medium hover:text-accent">
-              Let&rsquo;s talk <Arrow />
-            </Link>
           </Reveal>
-          <Reveal delay={100} className="lg:pt-[87px]">
-            {faqs.map((f) => (
-              <details key={f.q} open className="faq-item group border-b border-line pb-[18px] pt-[18px] first:pt-0">
-                <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-[19px] font-medium leading-[24.7px] hover:text-accent">
-                  {f.q}
-                  <span aria-hidden="true" className="faq-icon text-2xl leading-none font-normal text-muted transition-transform">
-                    +
-                  </span>
-                </summary>
-                <p className="mt-[14px] max-w-[700px] text-[15px] leading-6 text-muted">
-                  {f.a}{' '}
-                  {f.link && (
-                    <Link to={f.link.to} className="font-medium text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
-                      {f.link.label}
-                    </Link>
-                  )}
-                </p>
-              </details>
-            ))}
-          </Reveal>
+          <div className="mt-8 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,752px)] lg:items-stretch lg:gap-6">
+            <Reveal className="flex h-full flex-col">
+              <h2 className="max-w-[540px] font-display text-5xl font-bold leading-[1.05] tracking-[-0.05em] sm:text-[60px] lg:-ml-1">
+                A few things
+                <br />
+                you might be
+                <br />
+                wondering.
+              </h2>
+              <div className="mt-10 lg:mt-auto lg:pt-12">
+                <p className="text-[15px] leading-[22.5px] text-muted">Something else on your mind?</p>
+                <Link to="/contact" className="mt-3 inline-flex w-fit items-center gap-2 text-base font-medium hover:text-accent">
+                  Let&rsquo;s talk <Arrow />
+                </Link>
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              {faqs.map((f) => (
+                <details key={f.q} open className="faq-item group border-b border-line pb-[18px] pt-[18px] first:pt-0">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-[19px] font-medium leading-[24.7px] hover:text-accent">
+                    {f.q}
+                    <span aria-hidden="true" className="faq-icon text-2xl leading-none font-normal text-muted transition-transform">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-[14px] max-w-[700px] text-[15px] leading-6 text-muted">
+                    {f.a}{' '}
+                    {f.link && (
+                      <Link to={f.link.to} className="font-medium text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent">
+                        {f.link.label}
+                      </Link>
+                    )}
+                  </p>
+                </details>
+              ))}
+            </Reveal>
+          </div>
         </div>
       </section>
 

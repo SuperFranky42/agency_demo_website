@@ -71,8 +71,9 @@ export default function Contact() {
   const [form, setForm] = useState(() => ({
     need: needForPackage(initialPackage) || SERVICE_TO_NEED[params.get('service')] || '',
     packageId: initialPackage?.id ?? '',
-    name: '',
-    email: '',
+    name: params.get('first') ?? '',
+    lastName: params.get('last') ?? '',
+    email: params.get('email') ?? '',
     business: '',
     industry: '',
     website: '',
@@ -98,9 +99,9 @@ export default function Contact() {
   const validate = () => {
     const next = {}
     if (!form.need) next.need = 'Tell us what you need.'
-    if (!form.name.trim()) next.name = 'Please enter your name.'
+    if (!form.name.trim()) next.name = 'Please enter your first name.'
+    if (!form.lastName.trim()) next.lastName = 'Please enter your last name.'
     if (!EMAIL_RE.test(form.email)) next.email = 'Please enter a valid email address.'
-    if (!form.business.trim()) next.business = 'Please enter your business name.'
     if (!form.outcome) next.outcome = 'Choose the main outcome you want.'
     if (!form.budget) next.budget = 'Select a budget range.'
     if (!form.timeline) next.timeline = 'Select a timeline.'
@@ -124,6 +125,7 @@ export default function Contact() {
         'quote',
         {
           name: form.name.trim(),
+          lastName: form.lastName.trim(),
           email: form.email.trim(),
           business: form.business.trim(),
           industry: form.industry.trim(),
@@ -160,8 +162,13 @@ export default function Contact() {
         </div>
         <h1 className="mt-6 font-display text-4xl font-bold tracking-[-0.04em] sm:text-6xl">Thanks, {submitted.name.split(' ')[0]}.</h1>
         <p className="mt-4 text-lg text-muted">
-          We have your request for <strong className="text-ink">{submitted.business}</strong>. Expect a reply at{' '}
-          {submitted.email} within one business day with one clear recommendation.
+          We have your request
+          {submitted.business.trim() && (
+            <>
+              {' '}for <strong className="text-ink">{submitted.business}</strong>
+            </>
+          )}
+          . Expect a reply at {submitted.email} within one business day with one clear recommendation.
         </p>
         <dl className="mx-auto mt-8 grid max-w-md gap-3 rounded-md border border-line p-5 text-left text-sm">
           <div className="flex justify-between gap-4"><dt className="text-muted">Reference</dt><dd className="font-mono">{submitted.reference}</dd></div>
@@ -186,7 +193,7 @@ export default function Contact() {
       <section className="py-14 sm:py-16">
         <div className="container-x grid gap-12 lg:grid-cols-[1.6fr_1fr]">
           <form onSubmit={onSubmit} noValidate className="space-y-10">
-            <fieldset className="space-y-5">
+            <fieldset id="need" className="scroll-mt-24 space-y-5 md:scroll-mt-32">
               <legend className="font-display text-2xl font-bold tracking-[-0.02em]">1. What do you need?</legend>
               <div id="q-need" tabIndex={-1} className="flex flex-wrap gap-2 outline-none">
                 {NEEDS.map((n) => (
@@ -211,18 +218,23 @@ export default function Contact() {
             <fieldset className="space-y-5">
               <legend className="font-display text-2xl font-bold tracking-[-0.02em]">2. About you and your business</legend>
               <div className="grid gap-5 sm:grid-cols-2">
-                <Field label="Your name" error={errors.name} htmlFor="q-name">
-                  <input id="q-name" className={`field ${errors.name ? 'field-error' : ''}`} value={form.name} onChange={set('name')} autoComplete="name" />
+                <Field label="First name" error={errors.name} htmlFor="q-name">
+                  <input id="q-name" className={`field ${errors.name ? 'field-error' : ''}`} value={form.name} onChange={set('name')} autoComplete="given-name" />
+                </Field>
+                <Field label="Last name" error={errors.lastName} htmlFor="q-lastName">
+                  <input id="q-lastName" className={`field ${errors.lastName ? 'field-error' : ''}`} value={form.lastName} onChange={set('lastName')} autoComplete="family-name" />
                 </Field>
                 <Field label="Email" error={errors.email} htmlFor="q-email">
                   <input id="q-email" type="email" className={`field ${errors.email ? 'field-error' : ''}`} value={form.email} onChange={set('email')} autoComplete="email" />
                 </Field>
-                <Field label="Business name" error={errors.business} htmlFor="q-business">
-                  <input id="q-business" className={`field ${errors.business ? 'field-error' : ''}`} value={form.business} onChange={set('business')} autoComplete="organization" />
+                <Field label="Business name" optional htmlFor="q-business">
+                  <input id="q-business" className="field" value={form.business} onChange={set('business')} autoComplete="organization" />
                 </Field>
-                <Field label="Industry" optional htmlFor="q-industry">
-                  <input id="q-industry" className="field" value={form.industry} onChange={set('industry')} />
-                </Field>
+                <div className="sm:col-span-2">
+                  <Field label="Industry" optional htmlFor="q-industry">
+                    <input id="q-industry" className="field" value={form.industry} onChange={set('industry')} />
+                  </Field>
+                </div>
               </div>
               <Field label="Current website or social profile" optional htmlFor="q-website">
                 <input id="q-website" className="field" placeholder="https://" value={form.website} onChange={set('website')} />
