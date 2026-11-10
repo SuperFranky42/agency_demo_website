@@ -46,7 +46,7 @@ const members = [
 export default function Studio() {
   return (
     <>
-      <PageHeader eyebrow="The studio" title={<>Think bigger.<br />Stay offbeat.</>}>
+      <PageHeader eyebrow="The studio" title={<>Think bigger.<br />Beat the odds.</>}>
         We bring creative, marketing, digital experiences, and automation into one connected plan. Less handoff. More
         forward motion.
       </PageHeader>

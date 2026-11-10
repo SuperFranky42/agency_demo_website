@@ -54,7 +54,7 @@ export default function Footer() {
       </div>
       <div className="container-x">
         <div className="flex flex-col gap-2 border-t border-[#484b42] py-5 text-[11px] text-fog sm:flex-row sm:justify-between">
-          <p>&copy; {new Date().getFullYear()} Offbeat. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Oddbeat. All rights reserved.</p>
           <p>A little different. By design.</p>
         </div>
       </div>

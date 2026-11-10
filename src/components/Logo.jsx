@@ -7,8 +7,8 @@ const sizes = {
 
 export default function Logo({ size = 'nav', className = '' }) {
   return (
-    <Link to="/" aria-label="Offbeat home" className={`inline-flex shrink-0 font-display font-bold ${sizes[size]} ${className}`}>
-      offbeat®
+    <Link to="/" aria-label="Oddbeat home" className={`inline-flex shrink-0 font-display font-bold ${sizes[size]} ${className}`}>
+      oddbeat™
     </Link>
   )
 }

@@ -229,11 +229,11 @@ export default function Home() {
       <section id="studio" className="container-x">
         <div className="grid gap-10 border-b border-line pb-16 pt-14 sm:pb-[90px] sm:pt-[60px] lg:grid-cols-2 lg:gap-8">
           <Reveal>
-            <p className="eyebrow">05 / The offbeat way</p>
+            <p className="eyebrow">05 / The Oddbeat way</p>
             <p className="mt-8 font-serif text-[64px] leading-[1.03] tracking-[-0.03em] text-accent italic sm:text-[84px] lg:-ml-1">
               Think bigger.
               <br />
-              Stay offbeat.
+              Beat the odds.
             </p>
           </Reveal>
           <Reveal delay={100} className="lg:pt-[55px]">
