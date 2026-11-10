@@ -128,8 +128,14 @@ function WebsitesCard() {
 
 const steps = [
   { n: '01', label: 'New inquiry received', top: 146 },
-  { n: '02', label: 'AI qualifies the lead', top: 191, active: true },
+  { n: '02', label: 'AI qualifies the lead', top: 191 },
   { n: '03', label: 'Meeting booked', top: 236 },
+]
+
+const stepClass = [
+  'bg-[#374132]',
+  'bg-lime text-[#242922] group-hover:bg-[#374132] group-hover:text-canvas group-focus-visible:bg-[#374132] group-focus-visible:text-canvas',
+  'bg-[#374132] group-hover:bg-lime group-hover:text-[#242922] group-focus-visible:bg-lime group-focus-visible:text-[#242922]',
 ]
 
 function AutomationCard() {
@@ -144,7 +150,7 @@ function AutomationCard() {
       {steps.map((s, i) => (
         <div key={s.n}>
           <div
-            className={`flex items-center font-medium whitespace-nowrap ${s.active ? 'bg-lime text-[#242922]' : 'bg-[#374132]'}`}
+            className={`flex items-center font-medium whitespace-nowrap transition-colors duration-300 ${stepClass[i]}`}
             style={at(19, s.top, { width: u(278), height: u(34), borderRadius: u(6) })}
           >
             <span style={{ marginLeft: u(12), width: u(28), fontSize: u(9) }}>{s.n}</span>
