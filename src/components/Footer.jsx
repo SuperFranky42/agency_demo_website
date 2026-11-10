@@ -12,7 +12,7 @@ const explore = [
 export default function Footer() {
   return (
     <footer className="bg-ink text-canvas">
-      <div className="container-x grid gap-10 pb-10 pt-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.6fr)_repeat(3,minmax(0,1fr))] lg:pt-[35px]">
+      <div className="container-x grid gap-10 pb-10 pt-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,2.2fr)_repeat(3,minmax(0,1fr))] lg:pt-[35px]">
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo size="footer" className="-ml-1 text-canvas" />
           <p className="mt-4 text-[15px] leading-[22.5px] text-fog">Independent minds. Unforgettable brands.</p>

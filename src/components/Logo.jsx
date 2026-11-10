@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const sizes = {
   nav: 'text-[28px] tracking-[-0.04em] sm:text-[35px]',
-  footer: 'text-7xl leading-none tracking-[-0.05em] sm:text-[108px]',
+  footer: 'text-7xl leading-none tracking-[-0.05em] sm:text-[108px] lg:text-[clamp(4rem,7.2vw,6.75rem)]',
 }
 
 export default function Logo({ size = 'nav', className = '' }) {
