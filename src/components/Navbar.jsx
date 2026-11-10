@@ -6,7 +6,7 @@ const links = [
   { to: '/work', label: 'Work' },
   { to: '/services', label: 'Services' },
   { to: '/pricing', label: 'Pricing' },
-  { to: '/studio', label: 'The studio' },
+  { to: '/studio', label: 'The Studio' },
 ]
 
 function NavItem({ to, className, children }) {
