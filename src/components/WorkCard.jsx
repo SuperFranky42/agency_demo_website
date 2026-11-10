@@ -8,6 +8,20 @@ export default function WorkCard({ item, caption = true }) {
         <div className="absolute inset-0 transition duration-500 group-hover:scale-[1.03]">
           {item.image ? (
             <img src={item.image} alt={item.client} loading="lazy" className="h-full w-full object-cover object-top" />
+          ) : item.video ? (
+            <video
+              src={item.video.src}
+              preload="metadata"
+              muted
+              playsInline
+              tabIndex={-1}
+              aria-hidden="true"
+              className="pointer-events-none h-full w-full object-cover"
+              onLoadedMetadata={(event) => {
+                const video = event.currentTarget
+                if (video.currentTime === 0) video.currentTime = 0.1
+              }}
+            />
           ) : (
             <WorkVisual type={item.visual} />
           )}

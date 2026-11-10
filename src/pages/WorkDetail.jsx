@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import WorkVisual from '../components/WorkVisual.jsx'
 import WorkCard from '../components/WorkCard.jsx'
+import WorkVideo from '../components/WorkVideo.jsx'
 import CtaBanner from '../components/CtaBanner.jsx'
 import Reveal from '../components/Reveal.jsx'
 import NotFound from './NotFound.jsx'
@@ -27,13 +28,23 @@ export default function WorkDetail() {
           </p>
           <h1 className="mt-4 font-display text-5xl font-bold leading-[1.03] tracking-[-0.055em] sm:text-7xl lg:text-[84px]">{item.client}</h1>
           <p className="mt-5 max-w-2xl text-[17px] leading-7 text-muted">{item.summary}</p>
-          <div className="mt-10 aspect-[16/7] overflow-hidden rounded-lg bg-ink">
-            {item.image ? (
-              <img src={item.image} alt={item.client} className="h-full w-full object-cover object-top" />
-            ) : (
-              <WorkVisual type={item.visual} />
-            )}
-          </div>
+          {item.video ? (
+            <div className="mt-10">
+              <h2 className="section-title !text-3xl">Video work</h2>
+              <p className="mt-3 max-w-2xl text-muted">Click the film to play it.</p>
+              <div className="mx-auto mt-8 max-w-4xl">
+                <WorkVideo item={item.video} />
+              </div>
+            </div>
+          ) : (
+            <div className="mt-10 aspect-[16/7] overflow-hidden rounded-lg bg-ink">
+              {item.image ? (
+                <img src={item.image} alt={item.client} className="h-full w-full object-cover object-top" />
+              ) : (
+                <WorkVisual type={item.visual} />
+              )}
+            </div>
+          )}
         </div>
       </section>
 

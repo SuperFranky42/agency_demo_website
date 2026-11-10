@@ -1,4 +1,58 @@
-export const work = [
+const projects = [
+  {
+    slug: 'box-class',
+    client: 'Box Class',
+    category: 'Video edit',
+    year: '2026',
+    video: { title: 'Box Class', src: '/work/videos/box-class.mp4' },
+    summary: 'A short film of a boxing class, cut from a full session down to the exchanges that carry the room.',
+    challenge:
+      'The class ran much longer than anyone would watch online. The useful footage was in the ring, mixed in with setup, rest, and moments that did not need to be in the cut.',
+    solution:
+      'We shaped one promotional edit around the sparring: tighter pacing, the hits that read on a small screen, and a length that holds attention from the first exchange to the last.',
+    results: [
+      { value: '49 sec', label: 'finished film from a full class' },
+      { value: 'One cut', label: 'paced for social and the web' },
+      { value: 'In the ring', label: 'the class, without the downtime' },
+    ],
+    services: ['Promotional video', 'Video editing'],
+  },
+  {
+    slug: 'clubhouse-drive',
+    client: 'Clubhouse Drive',
+    category: 'Video edit',
+    year: '2025',
+    video: { title: 'Clubhouse Drive', src: '/work/videos/clubhouse-drive.mp4' },
+    summary: 'A property film for a home in Laurel, Maryland, cut so the rooms and the location land in under a minute.',
+    challenge:
+      'A walkthrough is easy to shoot and hard to watch. The house needed a cut that showed the space clearly, named the place, and stayed short enough to send.',
+    solution:
+      'We edited the tour into a single promotional film, with the rooms in an order that makes sense on a first watch and the Laurel, Maryland title held on screen.',
+    results: [
+      { value: '50 sec', label: 'property film' },
+      { value: 'Laurel, MD', label: 'location carried in the edit' },
+      { value: 'One film', label: 'from the walkthrough footage' },
+    ],
+    services: ['Promotional video', 'Video editing'],
+  },
+  {
+    slug: 'dhaka-concert',
+    client: 'Dhaka Concert',
+    category: 'Video edit',
+    year: '2025',
+    video: { title: 'Dhaka Concert', src: '/work/videos/dhaka-concert.mp4' },
+    summary: 'A short concert film from a live set in Dhaka, cut to the performance rather than the wait around it.',
+    challenge:
+      'Live footage is long, loud, and full of in-between moments. The piece needed to feel like the show, in the time someone will actually give it.',
+    solution:
+      'We cut the set down to a 29-second film: the performer, the room, and the light, paced so the song still feels live.',
+    results: [
+      { value: '29 sec', label: 'concert film' },
+      { value: 'Live set', label: 'cut to the performance' },
+      { value: 'One film', label: 'ready to share from the night' },
+    ],
+    services: ['Promotional video', 'Video editing'],
+  },
   {
     slug: 'nassar-construction',
     client: 'Nassar Construction LLC',
@@ -35,61 +89,14 @@ export const work = [
       'Short-form video editing (Creator Edit)',
     ],
   },
-  {
-    slug: 'northline-advisory',
-    client: 'Northline Advisory',
-    category: 'Brand identity',
-    visual: 'mountain',
-    year: '2026',
-    summary: 'A calm, confident identity for a boutique financial advisory firm entering a crowded market.',
-    challenge:
-      'Northline had strong referrals but an inconsistent look across their pitch decks, website and social profiles. Prospects found them through word of mouth, then lost confidence when the online presence felt dated.',
-    solution:
-      'We built a restrained brand system around a mountain mark and a single accent colour, then rolled it out across a new 5-page website, LinkedIn and Instagram templates, and a set of 8 launch graphics.',
-    results: [
-      { value: '2.4x', label: 'more website enquiries in 90 days' },
-      { value: '38%', label: 'lower bounce rate on the new site' },
-      { value: '3 wks', label: 'from kickoff to launch' },
-    ],
-    services: ['Brand identity', 'Business Launch package', 'Social profile setup'],
-  },
-  {
-    slug: 'velocity-campaign',
-    client: 'Velocity Campaign',
-    category: 'Campaign',
-    visual: 'dashboard',
-    year: '2026',
-    summary: 'A paid social and search campaign for a fitness studio chain, wired straight into a CRM.',
-    challenge:
-      'Velocity was spending on ads but had no idea which ones produced members. Leads arrived in three inboxes and many were never followed up.',
-    solution:
-      'We rebuilt their Meta and Google campaigns around one offer, sent every lead into a single CRM pipeline and added an automated SMS and email follow-up that books a trial session within minutes.',
-    results: [
-      { value: '-41%', label: 'cost per booked trial' },
-      { value: '< 2 min', label: 'average lead response time' },
-      { value: '312', label: 'trials booked in the first quarter' },
-    ],
-    services: ['Growth Engine package', 'Meta and Google Ads', 'CRM and lead follow-up'],
-  },
-  {
-    slug: 'summit-path-advisors',
-    client: 'Summit Path Advisors',
-    category: 'Website & funnel',
-    visual: 'laptop',
-    year: '2025',
-    summary: 'A lead-generation website and booking funnel with an AI receptionist for a consulting practice.',
-    challenge:
-      'Summit Path relied on a single-page site with a phone number. Calls went unanswered during client meetings, and there was no way to book a consultation online.',
-    solution:
-      'We designed a conversion-focused site with a dedicated funnel, calendar booking and an AI voice receptionist that answers routine questions, qualifies callers and logs summaries to the CRM.',
-    results: [
-      { value: '64%', label: 'of calls now handled without staff' },
-      { value: '3.1x', label: 'more consultations booked' },
-      { value: '24/7', label: 'enquiry coverage' },
-    ],
-    services: ['Website and funnel', 'AI Receptionist Setup', 'Booking automation'],
-  },
 ]
+
+function rank(item) {
+  const year = Number(item.year) || 0
+  return (item.status === 'In progress' ? 10000 : 0) + year
+}
+
+export const work = [...projects].sort((a, b) => rank(b) - rank(a))
 
 export function findWork(slug) {
   return work.find((item) => item.slug === slug)

@@ -168,9 +168,9 @@ export default function Home() {
           >
             A glimpse of what we&rsquo;ve built. Real projects that bring our creative approach to life.
           </SectionHead>
-          <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:mt-[39px]">
-            {work.slice(0, 2).map((item, i) => (
-              <Reveal key={item.slug} delay={(i % 2) * 90}>
+          <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:mt-[39px] lg:grid-cols-3">
+            {work.slice(0, 3).map((item, i) => (
+              <Reveal key={item.slug} delay={(i % 3) * 90}>
                 <WorkCard item={item} />
               </Reveal>
             ))}
