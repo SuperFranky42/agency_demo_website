@@ -33,14 +33,29 @@ function Card({ to, label, className = '', style, children }) {
 
 function CreativeCard() {
   return (
-    <Card to="/services#creative" label="Creative production" className="rounded-[7.4px] bg-ink">
-      <img src="/offbeat/pace.png" alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/65" />
+    <Card to="/services#creative" label="Creative production" className="rounded-[7.4px] bg-accent">
       <Label width={171}>01 / CREATIVE PRODUCTION</Label>
-      <p className="font-display font-bold leading-none whitespace-nowrap text-white" style={at(15.58, 162.45, { fontSize: u(48.958), letterSpacing: u(-2.9375) })}>
+      {[
+        { left: 47.58, top: 62.45, alpha: 0.2 },
+        { left: 31.58, top: 112.45, alpha: 0.45 },
+      ].map((echo) => (
+        <p
+          key={echo.top}
+          className="font-display font-bold leading-none whitespace-nowrap text-transparent transition duration-500 group-hover:translate-x-2"
+          style={at(echo.left, echo.top, {
+            fontSize: u(52.958),
+            letterSpacing: u(-2.9375),
+            WebkitTextStroke: `${u(0.9)} rgba(255, 255, 255, ${echo.alpha})`,
+          })}
+          aria-hidden="true"
+        >
+          PACE
+        </p>
+      ))}
+      <p className="font-display font-bold leading-none whitespace-nowrap text-white" style={at(15.58, 162.45, { fontSize: u(52.958), letterSpacing: u(-2.9375) })}>
         PACE
       </p>
-      <p className="font-medium whitespace-nowrap text-white" style={at(17.8, 220.31, { fontSize: u(7.418), letterSpacing: u(0.9643) })}>
+      <p className="font-medium whitespace-nowrap text-ink" style={at(17.8, 220.31, { fontSize: u(7.418), letterSpacing: u(0.9643) })}>
         BUILT FOR THE CHASE.
       </p>
       <span
@@ -85,45 +100,28 @@ function MarketingCard() {
 
 function WebsitesCard() {
   return (
-    <Card to="/services#websites" label="Websites and funnels" className="rounded-[7.4px] bg-lilac">
+    <Card to="/services#websites" label="Websites and funnels" className="rounded-[7.4px] bg-lilac text-[#332640]">
       <Label width={163}>03 / WEBSITES &amp; FUNNELS</Label>
-      <div className="overflow-hidden bg-[#f5f0f9]" style={at(25.22, 71, { width: u(265.559), height: u(200.282), borderRadius: u(4.451) })}>
-        <div className="bg-[#d7cce6]" style={at(0, 21.51, { width: '100%', height: u(0.742) })} />
-        <p className="whitespace-pre text-[#8d7da6]" style={at(8.9, 4.45, { fontSize: u(8.901) })}>
-          {'•  •  •'}
-        </p>
-        <p className="whitespace-nowrap text-[#675b78]" style={at(110.53, 6.68, { fontSize: u(5.934) })}>
-          forma.design
-        </p>
-        <p className="font-display font-bold whitespace-nowrap text-[#332640]" style={at(12.61, 29.67, { fontSize: u(14.836) })}>
-          forma®
-        </p>
-        <p className="whitespace-pre text-[#51445d]" style={at(160.23, 34.86, { fontSize: u(5.192) })}>
-          {'Objects     Our story     Bag (0)'}
-        </p>
-        <img
-          src="/offbeat/forma-chair.png"
-          alt=""
-          className="object-cover"
-          style={at(129.07, 63.05, { width: u(136.488), height: u(137.23) })}
-        />
-        <p className="font-serif whitespace-nowrap text-[#332640] italic" style={at(12.61, 57.86, { fontSize: u(27.446), lineHeight: u(25.962) })}>
-          Objects of
-          <br />
-          tomorrow.
-        </p>
-        <p className="whitespace-nowrap text-[#6b5f75]" style={at(13.35, 123.88, { fontSize: u(6.676), lineHeight: u(10.385) })}>
-          Considered design.
-          <br />
-          Extraordinary everyday.
-        </p>
-        <span
-          className="flex items-center rounded-full bg-[#332640] whitespace-pre text-white"
-          style={at(12.61, 161.71, { width: u(90.498), height: u(20.77), paddingLeft: u(9.64), fontSize: u(5.934) })}
-        >
-          {'Explore collection  ↗'}
-        </span>
-      </div>
+      <p className="font-display font-bold whitespace-nowrap" style={at(250, 51, { fontSize: u(9.598) })}>
+        forma®
+      </p>
+      <p className="font-serif whitespace-nowrap italic" style={at(16.24, 62, { fontSize: u(44), lineHeight: u(42), letterSpacing: u(-1.2) })}>
+        Objects
+        <br />
+        of tomorrow.
+      </p>
+      <div className="bg-[#332640]/25" style={at(17, 160, { width: u(282), height: u(0.742) })} />
+      <p className="whitespace-nowrap text-[#6b5f75]" style={at(16.98, 172, { fontSize: u(9), lineHeight: u(13) })}>
+        Considered design.
+        <br />
+        Extraordinary everyday.
+      </p>
+      <span
+        className="flex items-center rounded-full bg-[#332640] whitespace-pre text-white transition duration-300 group-hover:bg-accent"
+        style={at(16.98, 222, { width: u(112), height: u(26), paddingLeft: u(12), fontSize: u(8) })}
+      >
+        {'Explore collection  ↗'}
+      </span>
     </Card>
   )
 }

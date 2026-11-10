@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { useBookCall } from './BookCallModal.jsx'
 import Logo from './Logo.jsx'
 
 const links = [
@@ -28,7 +27,6 @@ function NavItem({ to, className, children }) {
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const { openBookCall } = useBookCall()
   const location = useLocation()
 
   useEffect(() => setOpen(false), [location.pathname, location.hash])
@@ -57,10 +55,7 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden items-center justify-end gap-6 md:flex">
-            <button onClick={() => openBookCall()} className="cursor-pointer text-sm font-medium hover:text-accent">
-              Book a call
-            </button>
+          <div className="hidden items-center justify-end md:flex">
             <Link to="/contact" className="btn btn-dark h-[52px] !pr-[22px]">
               Let&rsquo;s talk <span className="btn-arrow text-[23px]" aria-hidden="true">&#8599;</span>
             </Link>
@@ -90,13 +85,10 @@ export default function Navbar() {
               </NavItem>
             </li>
           ))}
-          <li className="grid gap-2 pt-3">
+          <li className="pt-3">
             <Link to="/contact" className="btn btn-dark w-full">
               Let&rsquo;s talk <span className="btn-arrow" aria-hidden="true">&#8599;</span>
             </Link>
-            <button onClick={() => openBookCall()} className="btn btn-outline-dark w-full">
-              Book a call
-            </button>
           </li>
         </ul>
       </div>

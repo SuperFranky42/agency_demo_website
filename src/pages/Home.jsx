@@ -6,7 +6,6 @@ import PricingPreview from '../components/PricingPreview.jsx'
 import WorkCard from '../components/WorkCard.jsx'
 import InquiryForm from '../components/InquiryForm.jsx'
 import Reveal from '../components/Reveal.jsx'
-import { useBookCall } from '../components/BookCallModal.jsx'
 import { services } from '../data/services.js'
 import { work } from '../data/work.js'
 
@@ -66,7 +65,6 @@ function Arrow({ className = '' }) {
 }
 
 export default function Home() {
-  const { openBookCall } = useBookCall()
   const [entered, setEntered] = useState(false)
 
   useEffect(() => {
@@ -100,13 +98,10 @@ export default function Home() {
                 <br />
                 AI automation that gives you time back.
               </p>
-              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+              <div className="mt-6">
                 <Link to="/contact" className="btn btn-accent h-[52px] !pr-[22px]">
                   Let&rsquo;s make some noise <Arrow className="text-[23px]" />
                 </Link>
-                <button onClick={() => openBookCall()} className="cursor-pointer text-sm font-medium underline decoration-line decoration-2 underline-offset-4 hover:decoration-accent">
-                  Book a call
-                </button>
               </div>
               <p className="mt-5 pl-2 text-xs text-muted">
                 <span className="mr-2 text-accent">&#9679;</span>Open for new projects

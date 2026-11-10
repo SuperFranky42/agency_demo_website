@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { allPackages, findPackage } from '../data/pricing.js'
-import { useBookCall } from '../components/BookCallModal.jsx'
 import PageHeader from '../components/PageHeader.jsx'
 import { makeReference } from '../lib/storage.js'
 import { submitForm } from '../lib/submitForm.js'
@@ -67,7 +66,6 @@ function Field({ label, error, optional, htmlFor, children }) {
 
 export default function Contact() {
   const [params] = useSearchParams()
-  const { openBookCall } = useBookCall()
 
   const initialPackage = findPackage(params.get('package') ?? '')
   const [form, setForm] = useState(() => ({
@@ -172,9 +170,8 @@ export default function Contact() {
           <div className="flex justify-between gap-4"><dt className="text-muted">Budget</dt><dd>{submitted.budget}</dd></div>
           <div className="flex justify-between gap-4"><dt className="text-muted">Timeline</dt><dd>{submitted.timeline}</dd></div>
         </dl>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <button onClick={() => openBookCall()} className="btn btn-accent">Book a call now</button>
-          <Link to="/" className="btn btn-outline-dark">Back to home</Link>
+        <div className="mt-8">
+          <Link to="/" className="btn btn-accent">Back to home</Link>
         </div>
       </section>
     )
@@ -323,13 +320,6 @@ export default function Contact() {
                 </Link>
               </div>
             )}
-            <div className="rounded-lg border border-line p-6">
-              <h3 className="font-display text-2xl font-bold tracking-[-0.02em]">Prefer to talk?</h3>
-              <p className="mt-2 text-sm text-muted">Book a free 30-minute strategy call and we will scope it together.</p>
-              <button onClick={() => openBookCall()} className="btn btn-outline-dark mt-4 w-full">
-                Book a call
-              </button>
-            </div>
             <div className="rounded-lg border border-line p-6 text-sm">
               <h3 className="font-semibold">What happens next</h3>
               <ol className="mt-3 space-y-2 text-muted">
